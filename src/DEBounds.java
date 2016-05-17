@@ -50,6 +50,14 @@ public class DEBounds {
         return true; // TODO test
     }
 
+    public DEPoint getTopLeft() {
+        return topLeft;
+    }
+
+    public DEPoint getBottomRight() {
+        return bottomRight;
+    }
+
     public double getLeft() {
         return topLeft.getX();
     }
