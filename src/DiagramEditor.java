@@ -39,7 +39,7 @@ public class DiagramEditor {
      * @return Returns true if it could delete any shapes, false
      * if there are no shapes to delete
      */
-    private boolean deleteSelectedShapes() {
+    private boolean deleteAllSelectedObjects() {
         ArrayList<DEObject> selected = getSelectedObjects();
         if (selected.size() == 0) return false;
 
@@ -47,6 +47,11 @@ public class DiagramEditor {
 
         draw();
         return true;
+    }
+
+    private void deselectAllSelectedObjects() {
+        ArrayList<DEObject> selected = getSelectedObjects();
+        assert selected.size() > 0 : "No objects to deselect";
     }
 
     private ArrayList<DEObject> getSelectedObjects() {
@@ -77,19 +82,21 @@ public class DiagramEditor {
     }
 
     public void addRectPressed() {
+        deselectAllSelectedObjects();
         addNewShape(new DeObjectShapeRect(
                 new DEBounds(10, 20, 400, 50))
         );
     }
 
     public void addEllipsePressed() {
+        deselectAllSelectedObjects();
         addNewShape(new DeObjectShapeEllipse(
                 new DEBounds(10, 20, 400, 50))
         );
     }
 
     public void deletePressed() {
-        if (deleteSelectedShapes()) {
+        if (deleteAllSelectedObjects()) {
             output.showMessage("Deleted shapes");
         } else {
             output.showMessage("Couldn't delete shapes");
