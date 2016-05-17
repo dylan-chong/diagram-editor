@@ -3,9 +3,9 @@ import ecs100.UI;
 /**
  * Created by Dylan on 17/05/16.
  */
-public class DeShapeRect extends DEShape {
+public class DeObjectShapeRect extends DEObjectShape {
 
-    public DeShapeRect(DEBounds bounds) {
+    public DeObjectShapeRect(DEBounds bounds) {
         super(bounds);
     }
 

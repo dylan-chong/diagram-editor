@@ -1,11 +1,12 @@
 /**
  * Created by Dylan on 17/05/16.
  */
-public abstract class DEShape {
+public abstract class DEObjectShape implements DEObject {
 
-    DEBounds bounds;
+    private DEBounds bounds;
 
-    public DEShape(DEBounds bounds) {
+    public DEObjectShape(DEBounds bounds) {
+        this.bounds = bounds;
 
     }
 
