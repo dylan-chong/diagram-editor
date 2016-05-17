@@ -10,7 +10,9 @@ import java.util.ArrayList;
 public class DiagramEditor {
 
     /**
-     * Contains DEGroup and DEObjectShape objects
+     * Contains DEGroup and DEObjectShape objects. They
+     * are sorted from bottom to top (where the top is
+     * the closest to the user).
      */
     ArrayList<DEObject> deObjects = new ArrayList<>();
     DiagramEditorOutput output;

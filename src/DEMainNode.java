@@ -6,11 +6,11 @@ import ecs100.UI;
  * A large, invisible node that covers the
  * entire bounds of the selected object
  */
-public class DEMovementNode extends DENode {
+public class DEMainNode extends DENode {
 
     private DEBounds bounds;
 
-    public DEMovementNode(DEBounds bounds) {
+    public DEMainNode(DEBounds bounds) {
         super(null);
         this.bounds = bounds;
     }

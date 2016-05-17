@@ -9,7 +9,7 @@ public abstract class DEObject implements DEDraggable {
     protected DEBounds bounds;
 
     private DENode[] nodes; //TODO LATER split into edge and corner nodes
-    private DEMovementNode movementNode;
+    private DEMainNode mainNode;
     private boolean isSelected;
 
     public boolean isSelected() {
@@ -46,7 +46,7 @@ public abstract class DEObject implements DEDraggable {
         };
 
         if (nodes == null) {
-            movementNode = new DEMovementNode(bounds);
+            mainNode = new DEMainNode(bounds);
 
             nodes = new DENode[nodePoints.length];
             for (int n = 0; n < nodes.length; n++) {
@@ -56,7 +56,7 @@ public abstract class DEObject implements DEDraggable {
             return;
         }
 
-        movementNode.fitToBounds(bounds);
+        mainNode.fitToBounds(bounds);
 
         for (int n = 0; n < nodes.length; n++) {
             nodes[n].setPoint(nodePoints[n]);
