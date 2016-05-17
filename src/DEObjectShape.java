@@ -1,9 +1,9 @@
 /**
  * Created by Dylan on 17/05/16.
- *
- *
+ * <p>
+ * The base for the shape object
  */
-public abstract class DEObjectShape implements DEObject {
+public abstract class DEObjectShape extends DEObject {
 
     protected DEBounds bounds;
 
@@ -12,6 +12,8 @@ public abstract class DEObjectShape implements DEObject {
     }
 
     public abstract void draw();
+
+
 
     public String toString() {
         return getClass().getName() + ": " + bounds.toString();
@@ -31,4 +33,7 @@ public abstract class DEObjectShape implements DEObject {
     public void pickUp(DEPoint mousePoint) {
         // TODO LATER
     }
+
+
+    // TODO AFTER add nodes
 }

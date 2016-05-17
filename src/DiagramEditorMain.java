@@ -15,14 +15,13 @@ public class DiagramEditorMain {
         DiagramEditor diagramEditor = new DiagramEditor();
 
         UI.initialise();
-        UI.setWindowSize(1650, 1000);
+        UI.setWindowSize(1500, 1000);
         UI.setDivider(0);
         UI.setImmediateRepaint(false);
 
-
-
         UI.setMouseMotionListener(diagramEditor::doMouse);
-        UI.addButton("Add Rect", diagramEditor::addRectPressed);
+        UI.addButton("Add Rectangle", diagramEditor::addRectPressed);
+        UI.addButton("Add Ellipse", diagramEditor::addEllipsePressed);
 
         UI.addButton("Delete Shape", diagramEditor::deletePressed);
     }

@@ -4,8 +4,18 @@
  * Can be implemented for a group and
  * shape objects
  */
-public interface DEObject extends DEDraggable {
+public abstract class DEObject implements DEDraggable {
 
-    void draw();
+    private boolean isSelected;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public abstract void draw();
 
 }

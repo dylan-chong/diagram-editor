@@ -24,6 +24,15 @@ public class DiagramEditor {
         UI.repaintAllGraphics();
     }
 
+    // ************************* OBJECTS AND SELECTION ************************* //
+
+    public void addNewShape(DEObject obj) {
+        obj.setSelected(true);
+        deObjects.add(obj);
+
+        draw();
+    }
+
     // ************************* EVENTS ************************* //
 
     public void doMouse(String action, double x, double y) {
@@ -44,12 +53,17 @@ public class DiagramEditor {
     }
 
     public void addRectPressed() {
-        DeObjectShapeRect rect = new DeObjectShapeRect(
-                new DEBounds(10, 20, 400, 50));
-        deObjects.add(rect);
-        draw();
+        addNewShape(new DeObjectShapeRect(
+                new DEBounds(10, 20, 400, 50))
+        );
     }
-    
+
+    public void addEllipsePressed() {
+        addNewShape(new DeObjectShapeEllipse(
+                new DEBounds(10, 20, 400, 50))
+        );
+    }
+
     public void deletePressed() {
         // TODO LATER
     }
