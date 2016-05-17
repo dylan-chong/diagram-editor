@@ -28,6 +28,10 @@ public class DENode implements DEDraggable {
         UI.drawRect(left, top, WIDTH, HEIGHT);
     }
 
+    public void setPoint(DEPoint point) {
+        this.point = point;
+    }
+
     @Override
     public void putDown(DEPoint mousePoint) {
         // TODO: 17/05/16
