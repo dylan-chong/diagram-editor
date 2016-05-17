@@ -73,15 +73,20 @@ public class DEBounds {
     public DEPoint getMidLeft() {
         return new DEPoint(getLeft(), getTop() + (getHeight() / 2));
     }
+
     public DEPoint getMidRight() {
         return new DEPoint(getRight(), getTop() + (getHeight() / 2));
     }
+
     public DEPoint getMidTop() {
         return new DEPoint(getLeft() + (getWidth() / 2), getTop());
     }
+
     public DEPoint getMidBottom() {
         return new DEPoint(getLeft() + (getWidth() / 2), getBottom());
     }
+
+    public DEPoint getCenter() { return new DEPoint(getLeft() + getWidth() / 2, getTop() + getHeight() / 2);}
 
     public double getWidth() {
         return bottomRight.getX() - topLeft.getX();

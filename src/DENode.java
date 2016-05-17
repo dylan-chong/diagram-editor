@@ -15,7 +15,7 @@ public class DENode implements DEDraggable {
     public static final double WIDTH = 10;
     public static final double HEIGHT = WIDTH;
 
-    private DEPoint point;
+    protected DEPoint point;
 
     public DENode(DEPoint point) {
         this.point = point;
