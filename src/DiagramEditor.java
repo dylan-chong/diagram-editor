@@ -15,10 +15,6 @@ public class DiagramEditor {
     ArrayList<DEObject> deObjects = new ArrayList<>();
 
     public DiagramEditor() {
-        DeObjectShapeRect rect = new DeObjectShapeRect(
-                new DEBounds(10, 20, 400, 50));
-        rect.draw();
-        deObjects.add(rect);
         draw();
     }
 
@@ -27,6 +23,8 @@ public class DiagramEditor {
         deObjects.forEach(DEObject::draw);
         UI.repaintAllGraphics();
     }
+
+    // ************************* EVENTS ************************* //
 
     public void doMouse(String action, double x, double y) {
         DEPoint mousePoint = new DEPoint(x, y);
@@ -45,4 +43,14 @@ public class DiagramEditor {
         }
     }
 
+    public void addRectPressed() {
+        DeObjectShapeRect rect = new DeObjectShapeRect(
+                new DEBounds(10, 20, 400, 50));
+        deObjects.add(rect);
+        draw();
+    }
+    
+    public void deletePressed() {
+        // TODO LATER
+    }
 }
