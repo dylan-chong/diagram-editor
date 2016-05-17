@@ -7,8 +7,4 @@ public class DiagramEditor {
 
     }
 
-    public void test() {
-
-    }
-
 }

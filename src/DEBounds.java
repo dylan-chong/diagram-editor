@@ -5,7 +5,7 @@
  */
 public class DEBounds {
 
-    private DEPoint upperLeft, bottomRight;
+    private DEPoint topLeft, bottomRight;
 
     /**
      * Sets the upper left and bottom right
@@ -29,6 +29,6 @@ public class DEBounds {
     }
 
     public String toString() {
-        return "[" + upperLeft.toString() + ", " + bottomRight + "]";
+        return "[Top Left: " + topLeft.toString() + ", Bottom Right: " + bottomRight + "]";
     }
 }
