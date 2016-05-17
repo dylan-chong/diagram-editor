@@ -18,7 +18,7 @@ public class DiagramEditor {
         DeObjectShapeRect rect = new DeObjectShapeRect(
                 new DEBounds(10, 20, 400, 50)
         );
-
+        rect.draw();
     }
 
 }

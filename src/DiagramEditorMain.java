@@ -13,6 +13,8 @@ public class DiagramEditorMain {
         }
 
         UI.initialise();
+        UI.setWindowSize(1650, 1000);
+        UI.setDivider(0);
 
         DiagramEditor diagramEditor = new DiagramEditor();
     }
