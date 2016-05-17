@@ -39,6 +39,8 @@ public class DiagramEditorMain {
         UI.addButton("Add Rectangle", diagramEditor::addRectPressed);
         UI.addButton("Add Ellipse", diagramEditor::addEllipsePressed);
         UI.addButton("Delete Selected", diagramEditor::deletePressed);
+
+        // TODO NEXT test node and shape drawing
     }
 
     private void printMessage(String msg) {
