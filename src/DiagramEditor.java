@@ -13,9 +13,11 @@ public class DiagramEditor {
      * Contains DEGroup and DEObjectShape objects
      */
     ArrayList<DEObject> deObjects = new ArrayList<>();
+    DiagramEditorOutput output;
 
-    public DiagramEditor() {
+    public DiagramEditor(DiagramEditorOutput output) {
         draw();
+        this.output = output;
     }
 
     private void draw() {
@@ -26,11 +28,33 @@ public class DiagramEditor {
 
     // ************************* OBJECTS AND SELECTION ************************* //
 
-    public void addNewShape(DEObject obj) {
+    private void addNewShape(DEObject obj) {
         obj.setSelected(true);
         deObjects.add(obj);
 
         draw();
+    }
+
+    /**
+     * @return Returns true if it could delete any shapes, false
+     * if there are no shapes to delete
+     */
+    private boolean deleteSelectedShapes() {
+        ArrayList<DEObject> selected = getSelectedObjects();
+        if (selected.size() == 0) return false;
+
+        deObjects.removeAll(selected);
+
+        draw();
+        return true;
+    }
+
+    private ArrayList<DEObject> getSelectedObjects() {
+        ArrayList<DEObject> selected = new ArrayList<>();
+        for (DEObject o : deObjects) {
+            if (o.isSelected()) selected.add(o);
+        }
+        return selected;
     }
 
     // ************************* EVENTS ************************* //
@@ -65,6 +89,10 @@ public class DiagramEditor {
     }
 
     public void deletePressed() {
-        // TODO LATER
+        if (deleteSelectedShapes()) {
+            output.showMessage("Deleted shapes");
+        } else {
+            output.showMessage("Couldn't delete shapes");
+        }
     }
 }

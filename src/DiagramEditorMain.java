@@ -12,18 +12,36 @@ public class DiagramEditorMain {
             ManualTest.runTests();
         }
 
-        DiagramEditor diagramEditor = new DiagramEditor();
 
         UI.initialise();
-        UI.setWindowSize(1500, 1000);
+        UI.setWindowSize(1500, 950);
+
+        DiagramEditorMain main = new DiagramEditorMain();
+
         UI.setDivider(0);
         UI.setImmediateRepaint(false);
+    }
+
+    private DiagramEditorMain() {
+        DiagramEditor diagramEditor = new DiagramEditor(new DiagramEditorOutput() {
+            @Override
+            public void showMessage(String msg) {
+                printMessage(msg);
+            }
+
+            @Override
+            public void showDebugMessage(String msg) {
+                showMessage("*** DEBUG *** " + msg);
+            }
+        });
 
         UI.setMouseMotionListener(diagramEditor::doMouse);
         UI.addButton("Add Rectangle", diagramEditor::addRectPressed);
         UI.addButton("Add Ellipse", diagramEditor::addEllipsePressed);
-
-        UI.addButton("Delete Shape", diagramEditor::deletePressed);
+        UI.addButton("Delete Selected", diagramEditor::deletePressed);
     }
 
+    private void printMessage(String msg) {
+        UI.printMessage(msg);
+    }
 }

@@ -13,8 +13,6 @@ public abstract class DEObjectShape extends DEObject {
 
     public abstract void draw();
 
-
-
     public String toString() {
         return getClass().getName() + ": " + bounds.toString();
     }
