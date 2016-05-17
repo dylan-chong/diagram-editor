@@ -91,19 +91,19 @@ public class DEBounds {
         return bottomRight.getY() - topLeft.getY();
     }
 
-    private double getLeft() {
+    public double getLeft() {
         return topLeft.getX();
     }
 
-    private double getRight() {
+    public double getRight() {
         return bottomRight.getX();
     }
 
-    private double getTop() {
+    public double getTop() {
         return topLeft.getY();
     }
 
-    private double getBottom() {
+    public double getBottom() {
         return bottomRight.getY();
     }
 

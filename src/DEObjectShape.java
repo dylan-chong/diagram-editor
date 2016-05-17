@@ -14,11 +14,16 @@ public abstract class DEObjectShape extends DEObject {
     protected Color fillColor = DEFAULT_FILL_COLOR;
     protected Color edgeColor = DEFAULT_EDGE_COLOR;
 
+    private DENode[] nodes;
+
     public DEObjectShape(DEBounds bounds) {
         this.bounds = bounds;
+        resetAllNodePoints();
     }
 
-    public abstract void draw();
+    public void draw() {
+        drawAllNodes();
+    }
 
     public String toString() {
         return getClass().getName() + ": " + bounds.toString();
@@ -39,6 +44,36 @@ public abstract class DEObjectShape extends DEObject {
         // TODO LATER
     }
 
+    private void drawAllNodes() {
+        for (DENode n : nodes) {
+            n.draw();
+        }
+    }
 
-    // TODO AFTER add nodes
+    private void resetAllNodePoints() {
+        DEPoint[] nodePoints = new DEPoint[]{
+                // Corners
+                bounds.getTopLeft(),
+                bounds.getTopRight(),
+                bounds.getBottomLeft(),
+                bounds.getBottomRight(),
+
+                // Edges
+                bounds.getMidLeft(),
+                bounds.getMidRight(),
+                bounds.getMidTop(),
+                bounds.getMidBottom()
+        };
+
+        if (nodes == null) {
+            nodes = new DENode[nodePoints.length];
+            for (int n = 0; n < nodes.length; n++) {
+                nodes[n] = new DENode(nodePoints[0]);
+            }
+            return;
+        }
+        for (int n = 0; n < nodes.length; n++) {
+            nodes[n].setPoint(nodePoints[n]);
+        }
+    }
 }

@@ -23,6 +23,8 @@ public class DeObjectShapeRect extends DEObjectShape {
             UI.setColor(edgeColor);
             UI.drawRect(bounds.getLeft(), bounds.getTop(), w, h);
         }
+
+        super.draw();
     }
 
 
