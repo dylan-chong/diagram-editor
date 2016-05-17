@@ -86,14 +86,14 @@ public class DiagramEditor {
     public void addRectPressed() {
         deselectAllSelectedObjects();
         addNewShape(new DeObjectShapeRect(
-                new DEBounds(10, 20, 400, 50))
+                new DEBounds(50 + 100 * Math.random(), 50 + 100 * Math.random(), 200, 250))
         );
     }
 
     public void addEllipsePressed() {
         deselectAllSelectedObjects();
         addNewShape(new DeObjectShapeEllipse(
-                new DEBounds(10, 20, 400, 50))
+                new DEBounds(50 + 100 * Math.random(), 50 + 100 * Math.random(), 200, 180))
         );
     }
 
