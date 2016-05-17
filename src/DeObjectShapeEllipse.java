@@ -23,6 +23,8 @@ public class DeObjectShapeEllipse extends DEObjectShape {
             UI.setColor(edgeColor);
             UI.drawOval(bounds.getLeft(), bounds.getTop(), w, h);
         }
+
+        super.draw();
     }
 
 
