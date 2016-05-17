@@ -17,7 +17,10 @@ public class DiagramEditorMain {
         UI.setDivider(0);
 
         DiagramEditor diagramEditor = new DiagramEditor();
+
+        UI.setMouseMotionListener(diagramEditor::doMouse);
+
+        // TODO LATER add buttons
     }
 
-    // TODO LATER add buttons
 }

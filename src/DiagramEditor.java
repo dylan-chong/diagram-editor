@@ -1,3 +1,5 @@
+import ecs100.UI;
+
 import java.util.ArrayList;
 
 /**
@@ -14,6 +16,22 @@ public class DiagramEditor {
 
     public DiagramEditor() {
 
+    }
+
+    public void doMouse(String action, double x, double y) {
+        UI.println(action + "\n");
+        switch (action) {
+            case "dragged":
+                break;
+            case "moved":
+                break;
+            case "pressed":
+                break;
+            case "released":
+                break;
+            case "clicked":
+                break;
+        }
     }
 
 }
