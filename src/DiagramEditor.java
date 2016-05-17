@@ -33,7 +33,6 @@ public class DiagramEditor {
 
         switch (action) {
             case "dragged":
-                UI.println(deObjects.get(0).pointIsWithinBounds(mousePoint));
                 break;
             case "moved":
                 break;
