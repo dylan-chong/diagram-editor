@@ -25,7 +25,7 @@ public class DEBounds {
     }
 
     public DEBounds(double x, double y, double w, double h) {
-        this(new DEPoint(x, y), new DEPoint(w - x, h - y));
+        this(new DEPoint(x, y), new DEPoint(x + w, y + h));
     }
 
     /**

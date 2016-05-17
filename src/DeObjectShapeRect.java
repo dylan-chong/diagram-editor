@@ -13,7 +13,7 @@ public class DeObjectShapeRect extends DEObjectShape {
     public void draw() {
         double w = bounds.getRight() - bounds.getLeft();
         double h = bounds.getBottom() - bounds.getTop();
-        UI.drawRect(bounds.getLeft(), bounds.getTop(), w, w); // TODO test
+        UI.drawRect(bounds.getLeft(), bounds.getTop(), w, h); // TODO test
     }
 
 
