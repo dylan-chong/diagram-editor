@@ -5,6 +5,8 @@
  */
 public class DEBounds {
 
+    private DEPoint upperLeft, bottomRight;
+
     /**
      * Sets the upper left and bottom right
      * points based on pointA and pointB
@@ -13,7 +15,7 @@ public class DEBounds {
      * @param pointB
      */
     public DEBounds(DEPoint pointA, DEPoint pointB) {
-
+        // TODO set upper left and bottom right points
     }
 
     /**
@@ -22,6 +24,11 @@ public class DEBounds {
      * the bounds
      */
     public boolean pointIsWithinBounds(DEPoint point) {
+        // TODO
+        return true;
+    }
 
+    public String toString() {
+        return "[" + upperLeft.toString() + ", " + bottomRight + "]";
     }
 }

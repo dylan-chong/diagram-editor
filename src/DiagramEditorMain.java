@@ -7,6 +7,9 @@ public class DiagramEditorMain {
 
     public static void main(String[] args) {
         UI.initialise();
+
+        DiagramEditor diagramEditor = new DiagramEditor();
+        UI.addButton("*** test ***", diagramEditor::test);
     }
 
 }

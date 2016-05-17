@@ -3,4 +3,12 @@
  */
 public class DiagramEditor {
 
+    public DiagramEditor() {
+
+    }
+
+    public void test() {
+
+    }
+
 }

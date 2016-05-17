@@ -20,5 +20,7 @@ public class DEPoint {
         return y;
     }
 
-
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
 }
