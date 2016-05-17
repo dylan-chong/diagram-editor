@@ -51,7 +51,7 @@ public class DEBounds {
         if (point.getX() < topLeft.getX()) return false;
         if (point.getY() > bottomRight.getY()) return false;
         if (point.getY() < topLeft.getY()) return false;
-        return true; // TODO test
+        return true;
     }
 
     public DEPoint getTopLeft() {

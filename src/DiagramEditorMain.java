@@ -19,4 +19,5 @@ public class DiagramEditorMain {
         DiagramEditor diagramEditor = new DiagramEditor();
     }
 
+    // TODO LATER add buttons
 }

@@ -24,11 +24,11 @@ public abstract class DEObjectShape implements DEObject {
 
     @Override
     public void putDown(DEPoint mousePoint) {
-
+        // TODO LATER
     }
 
     @Override
     public void pickUp(DEPoint mousePoint) {
-
+        // TODO LATER
     }
 }
