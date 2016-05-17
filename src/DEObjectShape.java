@@ -22,7 +22,7 @@ public abstract class DEObjectShape extends DEObject {
     }
 
     public void draw() {
-        drawAllNodes();
+        if (isSelected()) drawAllNodes();
     }
 
     public String toString() {
