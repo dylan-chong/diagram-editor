@@ -18,7 +18,7 @@ public class DEGroup implements DEObject {
     }
 
     @Override
-    public boolean pointIsOverThis(DEPoint point) {
+    public boolean pointIsWithinBounds(DEPoint point) {
         return false;
     }
 }

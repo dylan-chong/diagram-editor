@@ -24,6 +24,10 @@ public class DEBounds {
         assert topLeft.getY() <= bottomRight.getY() : "Point sorting error";
     }
 
+    public DEBounds(double x, double y, double w, double h) {
+        this(new DEPoint(x, y), new DEPoint(w - x, h - y));
+    }
+
     /**
      * Sorts two points to increasing order
      * inside a new array
@@ -56,6 +60,14 @@ public class DEBounds {
 
     public DEPoint getBottomRight() {
         return bottomRight;
+    }
+
+    public double getWidth() {
+        return bottomRight.getX() - topLeft.getX();
+    }
+
+    public double getHeight() {
+        return bottomRight.getY() - topLeft.getY();
     }
 
     public double getLeft() {

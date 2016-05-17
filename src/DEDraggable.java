@@ -8,6 +8,6 @@ public interface DEDraggable {
 
     void putDown(DEPoint mousePoint);
     void pickUp(DEPoint mousePoint);
-    boolean pointIsOverThis(DEPoint point);
+    boolean pointIsWithinBounds(DEPoint point);
 
 }

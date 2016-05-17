@@ -11,21 +11,10 @@ public class DeObjectShapeRect extends DEObjectShape {
 
     @Override
     public void draw() {
-        UI.drawRect(bounds, 20, 100, 200); // TODO test
+        double w = bounds.getRight() - bounds.getLeft();
+        double h = bounds.getBottom() - bounds.getTop();
+        UI.drawRect(bounds.getLeft(), bounds.getTop(), w, w); // TODO test
     }
 
-    @Override
-    public void putDown(DEPoint mousePoint) {
 
-    }
-
-    @Override
-    public void pickUp(DEPoint mousePoint) {
-
-    }
-
-    @Override
-    public boolean pointIsOverThis(DEPoint point) {
-        return false;
-    }
 }

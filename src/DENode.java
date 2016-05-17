@@ -22,7 +22,7 @@ public class DENode implements DEDraggable {
     }
 
     @Override
-    public boolean pointIsOverThis(DEPoint point) {
+    public boolean pointIsWithinBounds(DEPoint point) {
         // TODO: 17/05/16
         return false;
     }

@@ -16,4 +16,19 @@ public abstract class DEObjectShape implements DEObject {
     public String toString() {
         return getClass().getName() + ": " + bounds.toString();
     }
+
+    @Override
+    public boolean pointIsWithinBounds(DEPoint point) {
+        return bounds.pointIsWithinBounds(point);
+    }
+
+    @Override
+    public void putDown(DEPoint mousePoint) {
+
+    }
+
+    @Override
+    public void pickUp(DEPoint mousePoint) {
+
+    }
 }
