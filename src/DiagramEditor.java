@@ -1,7 +1,16 @@
+import java.util.ArrayList;
+
 /**
  * Created by Dylan on 17/05/16.
+ *
+ * The controller for the app
  */
 public class DiagramEditor {
+
+    /**
+     * Contains DEGroup and DEObjectShape objects
+     */
+    ArrayList<DEObject> deObjects = new ArrayList<>();
 
     public DiagramEditor() {
 

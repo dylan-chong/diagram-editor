@@ -8,5 +8,4 @@ public interface DEObject extends DEDraggable {
 
     void draw();
 
-
 }
