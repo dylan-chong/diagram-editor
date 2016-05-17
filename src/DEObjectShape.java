@@ -62,13 +62,13 @@ public abstract class DEObjectShape extends DEObject {
                 bounds.getMidLeft(),
                 bounds.getMidRight(),
                 bounds.getMidTop(),
-                bounds.getMidBottom()
+                bounds.getMidBottom(),
         };
 
         if (nodes == null) {
             nodes = new DENode[nodePoints.length];
             for (int n = 0; n < nodes.length; n++) {
-                nodes[n] = new DENode(nodePoints[0]);
+                nodes[n] = new DENode(nodePoints[n]);
             }
             return;
         }

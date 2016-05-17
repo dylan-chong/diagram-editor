@@ -80,7 +80,7 @@ public class DEBounds {
         return new DEPoint(getLeft() + (getWidth() / 2), getTop());
     }
     public DEPoint getMidBottom() {
-        return new DEPoint(getLeft() + (getWidth() / 2), getTop());
+        return new DEPoint(getLeft() + (getWidth() / 2), getBottom());
     }
 
     public double getWidth() {
