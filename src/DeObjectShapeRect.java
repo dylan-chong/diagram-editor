@@ -16,7 +16,7 @@ public class DeObjectShapeRect extends DEObjectShape {
 
     @Override
     public void putDown(DEPoint mousePoint) {
-        
+
     }
 
     @Override

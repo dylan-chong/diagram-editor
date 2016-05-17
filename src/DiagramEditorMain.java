@@ -8,6 +8,11 @@ import ecs100.UI;
 public class DiagramEditorMain {
 
     public static void main(String[] args) {
+        if (true) {
+            ManualTest.runTests();
+            return;
+        }
+
         UI.initialise();
 
         DiagramEditor diagramEditor = new DiagramEditor();
