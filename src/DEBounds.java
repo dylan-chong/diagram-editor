@@ -58,8 +58,29 @@ public class DEBounds {
         return topLeft;
     }
 
+    public DEPoint getTopRight() {
+        return new DEPoint(getRight(), getTop());
+    }
+
+    public DEPoint getBottomLeft() {
+        return new DEPoint(getLeft(), getBottom());
+    }
+
     public DEPoint getBottomRight() {
         return bottomRight;
+    }
+
+    public DEPoint getMidLeft() {
+        return new DEPoint(getLeft(), getTop() + (getHeight() / 2));
+    }
+    public DEPoint getMidRight() {
+        return new DEPoint(getRight(), getTop() + (getHeight() / 2));
+    }
+    public DEPoint getMidTop() {
+        return new DEPoint(getLeft() + (getWidth() / 2), getTop());
+    }
+    public DEPoint getMidBottom() {
+        return new DEPoint(getLeft() + (getWidth() / 2), getTop());
     }
 
     public double getWidth() {
@@ -70,19 +91,19 @@ public class DEBounds {
         return bottomRight.getY() - topLeft.getY();
     }
 
-    public double getLeft() {
+    private double getLeft() {
         return topLeft.getX();
     }
 
-    public double getRight() {
+    private double getRight() {
         return bottomRight.getX();
     }
 
-    public double getTop() {
+    private double getTop() {
         return topLeft.getY();
     }
 
-    public double getBottom() {
+    private double getBottom() {
         return bottomRight.getY();
     }
 
