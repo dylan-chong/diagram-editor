@@ -15,13 +15,25 @@ public class DiagramEditor {
     ArrayList<DEObject> deObjects = new ArrayList<>();
 
     public DiagramEditor() {
+        DeObjectShapeRect rect = new DeObjectShapeRect(
+                new DEBounds(10, 20, 400, 50));
+        rect.draw();
+        deObjects.add(rect);
+        draw();
+    }
 
+    private void draw() {
+        UI.clearGraphics();
+        deObjects.forEach(DEObject::draw);
+        UI.repaintAllGraphics();
     }
 
     public void doMouse(String action, double x, double y) {
-        UI.println(action + "\n");
+        DEPoint mousePoint = new DEPoint(x, y);
+
         switch (action) {
             case "dragged":
+                UI.println(deObjects.get(0).pointIsWithinBounds(mousePoint));
                 break;
             case "moved":
                 break;

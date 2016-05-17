@@ -16,6 +16,8 @@ public class DiagramEditorMain {
         UI.setWindowSize(1650, 1000);
         UI.setDivider(0);
 
+        UI.setImmediateRepaint(false);
+
         DiagramEditor diagramEditor = new DiagramEditor();
 
         UI.setMouseMotionListener(diagramEditor::doMouse);
