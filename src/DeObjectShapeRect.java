@@ -11,7 +11,7 @@ public class DeObjectShapeRect extends DEObjectShape {
 
     @Override
     public void draw() {
-        UI.drawRect(10, 20, 100, 200); // TODO test
+        UI.drawRect(bounds, 20, 100, 200); // TODO test
     }
 
     @Override

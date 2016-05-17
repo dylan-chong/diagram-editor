@@ -1,19 +1,15 @@
+
 /**
  * Created by Dylan on 17/05/16.
+ *
+ * Manual testing is faster than unit
+ * testing, since you can use breakpoints
  */
 public class ManualTest {
 
     public static void runTests() {
-        testBounds();
-    }
+        System.out.println("\n\nSTARTED TESTS\n\n");
 
-    public static void testBounds() {
-        DEBounds[] boundses = {
-            new DEBounds(new DEPoint(1, 2), new DEPoint(2, 3)),
-            new DEBounds(new DEPoint(2, 1), new DEPoint(2, 3)),
-            new DEBounds(new DEPoint(2, 2), new DEPoint(3, 3)),
-            new DEBounds(new DEPoint(2, 30), new DEPoint(2, 30)),
-        };
-
+        System.out.println("\n\nFINISHED TESTS\n\n");
     }
 }

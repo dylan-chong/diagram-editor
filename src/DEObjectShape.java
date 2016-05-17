@@ -5,11 +5,10 @@
  */
 public abstract class DEObjectShape implements DEObject {
 
-    private DEBounds bounds;
+    protected DEBounds bounds;
 
     public DEObjectShape(DEBounds bounds) {
         this.bounds = bounds;
-
     }
 
     public abstract void draw();
