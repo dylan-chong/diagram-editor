@@ -51,7 +51,9 @@ public class DiagramEditor {
 
     private void deselectAllSelectedObjects() {
         ArrayList<DEObject> selected = getSelectedObjects();
-        assert selected.size() > 0 : "No objects to deselect";
+        for (DEObject obj : selected) {
+            obj.setSelected(false);
+        }
     }
 
     private ArrayList<DEObject> getSelectedObjects() {
