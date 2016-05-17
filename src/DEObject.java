@@ -4,7 +4,7 @@
  * Can be implemented for a group and
  * shape objects
  */
-public interface DEObject {
+public interface DEObject extends DEDraggable {
 
     void draw();
 
