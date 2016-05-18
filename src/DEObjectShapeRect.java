@@ -3,9 +3,9 @@ import ecs100.UI;
 /**
  * Created by Dylan on 17/05/16.
  */
-public class DEObjectShapeEllipseX extends DEObjectShape {
+public class DEObjectShapeRect extends DEObjectShape {
 
-    public DEObjectShapeEllipseX(DEBounds bounds) {
+    public DEObjectShapeRect(DEBounds bounds) {
         super(bounds);
     }
 
@@ -17,11 +17,11 @@ public class DEObjectShapeEllipseX extends DEObjectShape {
         assert fillColor != null || edgeColor != null : "Fill and edge color can't both be transparent";
         if (fillColor != null) {
             UI.setColor(fillColor);
-            UI.fillOval(bounds.getLeft(), bounds.getTop(), w, h);
+            UI.fillRect(bounds.getLeft(), bounds.getTop(), w, h);
         }
         if (edgeColor != null) {
             UI.setColor(edgeColor);
-            UI.drawOval(bounds.getLeft(), bounds.getTop(), w, h);
+            UI.drawRect(bounds.getLeft(), bounds.getTop(), w, h);
         }
 
         super.draw();
