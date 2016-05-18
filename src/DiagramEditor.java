@@ -87,7 +87,8 @@ public class DiagramEditor {
                     if (hasCheckedForObjectBeingDragged) return;
                     // may set it to null
                     objectBeingDragged =
-                            getObjectWithMainNodeAtPoint(mouseDownPosition, true);
+                            getObjectThatCanBeSelectedAtPoint(mouseDownPosition, true);
+
 
                     if (objectBeingDragged != null) {
                         objectBeingDragged.pickUp(mouseDownPosition);
@@ -127,24 +128,25 @@ public class DiagramEditor {
     public boolean attemptSelectAtPoint(DEPoint mousePoint) {
         deselectAllSelectedObjects();
 
-        DEObject obj = getObjectWithMainNodeAtPoint(mousePoint, false);
+        DEObject obj = getObjectThatCanBeSelectedAtPoint(mousePoint, false);
         if (obj == null) return false;
 
         obj.setSelected(true);
+
         draw();
         return true;
     }
 
-    public DEObject getObjectWithMainNodeAtPoint(DEPoint mousePoint, boolean mustBeSelected) {
+    public DEObject getObjectThatCanBeSelectedAtPoint(DEPoint mousePoint, boolean mustBeSelected) {
         for (DEObject obj : deObjects) {
-            if (obj.isOnMainNode(mousePoint)) {
+            if (obj.pointIsWithinBounds(mousePoint)) {
                 if (!mustBeSelected || obj.isSelected())
                     return obj;
             }
         }
-
         return null;
     }
+
 
     public void addRectPressed() {
         deselectAllSelectedObjects();

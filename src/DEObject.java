@@ -9,7 +9,6 @@ public abstract class DEObject implements DEDraggable {
     protected DEBounds bounds;
 
     private DENode[] nodes; //TODO LATER split into edge and corner nodes
-    private DEMainNode mainNode;
     private boolean isSelected;
 
     /**
@@ -36,7 +35,6 @@ public abstract class DEObject implements DEDraggable {
         for (DENode n : nodes) {
             n.draw();
         }
-        mainNode.draw();
     }
 
     protected void resetAllNodePoints() {
@@ -55,8 +53,6 @@ public abstract class DEObject implements DEDraggable {
         };
 
         if (nodes == null) {
-            mainNode = new DEMainNode(bounds);
-
             nodes = new DENode[nodePoints.length];
             for (int n = 0; n < nodes.length; n++) {
                 nodes[n] = new DENode(nodePoints[n]);
@@ -64,8 +60,6 @@ public abstract class DEObject implements DEDraggable {
 
             return;
         }
-
-        mainNode.fitToBounds(bounds);
 
         for (int n = 0; n < nodes.length; n++) {
             nodes[n].setPoint(nodePoints[n]);
@@ -77,14 +71,10 @@ public abstract class DEObject implements DEDraggable {
         resetAllNodePoints();
     }
 
-    public boolean isOnMainNode(DEPoint mousePoint) {
-        return mainNode.pointIsWithinBounds(mousePoint);
-    }
-
-    // Linked with mainNode (moving shape)
+    // Dragging shape around
 
     public void putDown(DEPoint mousePoint) {
-//        mainNode.putDown(mousePoint); TODO make the mainnode move with the mouse
+//        mainNode.putDown(mousePoint); TODO make the nodes move with the mouse
         DEPoint newTopLeft = new DEPoint(mousePoint.getX() - pickUpRelativePoint.getX(),
                 mousePoint.getY() - pickUpRelativePoint.getY());
         DEPoint newBottomRight = new DEPoint(newTopLeft.getX() + bounds.getWidth(),
@@ -102,7 +92,11 @@ public abstract class DEObject implements DEDraggable {
     }
 
     public boolean pointIsWithinBounds(DEPoint point) {
-        return mainNode.pointIsWithinBounds(point);
+        if (!bounds.pointIsWithinBounds(point)) return false;
+
+        // TODO NEXT make sure the user isn't clicking on nodes
+
+        return true;
     }
 
 }
