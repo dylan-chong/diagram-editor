@@ -4,7 +4,7 @@
  * Can be implemented for a group and
  * shape objects
  */
-public abstract class DEObject implements DEDraggable {
+public abstract class DEObject {
 
     protected DEBounds bounds;
 
@@ -28,6 +28,7 @@ public abstract class DEObject implements DEDraggable {
         for (DENode n : nodes) {
             n.draw();
         }
+        mainNode.draw();
     }
 
     protected void resetAllNodePoints() {

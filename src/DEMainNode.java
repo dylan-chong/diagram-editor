@@ -12,7 +12,7 @@ public class DEMainNode extends DENode {
 
     public DEMainNode(DEBounds bounds) {
         super(null);
-        this.bounds = bounds;
+        fitToBounds(bounds);
     }
 
     public void fitToBounds(DEBounds objectBounds) {

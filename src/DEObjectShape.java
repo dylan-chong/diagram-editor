@@ -23,18 +23,4 @@ public abstract class DEObjectShape extends DEObject {
         return getClass().getName() + ": " + bounds.toString();
     }
 
-    @Override
-    public boolean pointIsWithinBounds(DEPoint point) {
-        return bounds.pointIsWithinBounds(point);
-    }
-
-    @Override
-    public void putDown(DEPoint mousePoint) {
-        // TODO LATER
-    }
-
-    @Override
-    public void pickUp(DEPoint mousePoint) {
-        // TODO LATER
-    }
 }
