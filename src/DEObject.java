@@ -1,16 +1,24 @@
 /**
  * Created by Dylan on 17/05/16.
- *
+ * <p>
  * Can be implemented for a group and
  * shape objects
  */
-public abstract class DEObject {
+public abstract class DEObject implements DEDraggable {
 
     protected DEBounds bounds;
 
     private DENode[] nodes; //TODO LATER split into edge and corner nodes
     private DEMainNode mainNode;
     private boolean isSelected;
+
+    /**
+     * When the object has just started being dragged,
+     * a mousePoint is passed to this.pickUp. The
+     * pickUpRelativePoint is of the mouse to the top left
+     * of this object's top left
+     */
+    private DEPoint pickUpRelativePoint;
 
     public boolean isSelected() {
         return isSelected;
@@ -64,8 +72,37 @@ public abstract class DEObject {
         }
     }
 
+    private void setBounds(DEBounds bounds) {
+        this.bounds = bounds;
+        resetAllNodePoints();
+    }
+
     public boolean isOnMainNode(DEPoint mousePoint) {
         return mainNode.pointIsWithinBounds(mousePoint);
+    }
+
+    // Linked with mainNode (moving shape)
+
+    public void putDown(DEPoint mousePoint) {
+//        mainNode.putDown(mousePoint); TODO make the mainnode move with the mouse
+        DEPoint newTopLeft = new DEPoint(mousePoint.getX() - pickUpRelativePoint.getX(),
+                mousePoint.getY() - pickUpRelativePoint.getY());
+        DEPoint newBottomRight = new DEPoint(newTopLeft.getX() + bounds.getWidth(),
+                newTopLeft.getY() + bounds.getHeight());
+
+        setBounds(new DEBounds(newTopLeft, newBottomRight));
+
+        System.out.println("pick up");
+    }
+
+    public void pickUp(DEPoint mousePoint) {
+        pickUpRelativePoint = new DEPoint(mousePoint.getX() - bounds.getLeft(),
+                mousePoint.getY() - bounds.getTop());
+        System.out.println("pick up");
+    }
+
+    public boolean pointIsWithinBounds(DEPoint point) {
+        return mainNode.pointIsWithinBounds(point);
     }
 
 }

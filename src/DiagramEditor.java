@@ -14,8 +14,11 @@ public class DiagramEditor {
      * are sorted from top to bottom (where the top is
      * the closest to the user).
      */
-    ArrayList<DEObject> deObjects = new ArrayList<>();
-    DiagramEditorOutput output;
+    private ArrayList<DEObject> deObjects = new ArrayList<>();
+    private DiagramEditorOutput output;
+
+    private DEPoint mouseDownPosition;
+    private DEObject objectBeingDragged;
 
     public DiagramEditor(DiagramEditorOutput output) {
         draw();
@@ -73,30 +76,49 @@ public class DiagramEditor {
 
         switch (action) {
             case "dragged":
+                if (objectBeingDragged == null) {
+                    // may set it to null
+                    objectBeingDragged =
+                            getObjectWithMainNodeAtPoint(mouseDownPosition);
+                    objectBeingDragged.pickUp(mouseDownPosition);
+                }
                 break;
-            case "moved":
-                break;
+
             case "pressed":
+                mouseDownPosition = mousePoint;
                 break;
+
             case "released":
+                if (objectBeingDragged != null) {
+                    objectBeingDragged.putDown(mousePoint);
+                    objectBeingDragged = null;
+                }
+                mouseDownPosition = null;
+                draw();
                 break;
+
             case "clicked":
-                attemptSelectAtPoint(new DEPoint(x, y));
+                attemptSelectAtPoint(mousePoint);
+                mouseDownPosition = null;
+                objectBeingDragged = null;
                 break;
         }
     }
 
     public void attemptSelectAtPoint(DEPoint mousePoint) {
         deselectAllSelectedObjects();
+        getObjectWithMainNodeAtPoint(mousePoint).setSelected(true);
+        draw();
+    }
 
+    public DEObject getObjectWithMainNodeAtPoint(DEPoint mousePoint) {
         for (DEObject obj : deObjects) {
             if (obj.isOnMainNode(mousePoint)) {
-                obj.setSelected(true);
-                break;
+                return obj;
             }
         }
 
-        draw();
+        return null;
     }
 
     public void addRectPressed() {

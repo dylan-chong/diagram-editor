@@ -14,7 +14,7 @@ public class DiagramEditorMain {
 
 
         UI.initialise();
-        UI.setWindowSize(1500, 950);
+        UI.setWindowSize(1000, 750);
 
         DiagramEditorMain main = new DiagramEditorMain();
 
