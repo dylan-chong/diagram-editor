@@ -18,7 +18,7 @@ public class DiagramEditor {
     private DiagramEditorOutput output;
 
     private DEPoint mouseDownPosition;
-    private DEObject objectBeingDragged;
+    private DEObject objectBeingDragged; // TODO LATER make this the node being dragged
 
     public DiagramEditor(DiagramEditorOutput output) {
         draw();
@@ -123,14 +123,14 @@ public class DiagramEditor {
 
     public void addRectPressed() {
         deselectAllSelectedObjects();
-        addNewShape(new DeObjectShapeRect(
+        addNewShape(new DEObjectShapeRectX(
                 new DEBounds(50 + 100 * Math.random(), 50 + 100 * Math.random(), 200, 250))
         );
     }
 
     public void addEllipsePressed() {
         deselectAllSelectedObjects();
-        addNewShape(new DeObjectShapeEllipse(
+        addNewShape(new DEObjectShapeEllipseX(
                 new DEBounds(50 + 100 * Math.random(), 50 + 100 * Math.random(), 200, 180))
         );
     }
