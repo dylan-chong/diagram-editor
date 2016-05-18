@@ -19,6 +19,7 @@ public class DiagramEditor {
 
     private DEPoint mouseDownPosition;
     private DEObject objectBeingDragged; // TODO LATER make this the node being dragged
+    private boolean hasCheckedForObjectBeingDragged;
 
     public DiagramEditor(DiagramEditorOutput output) {
         draw();
@@ -59,6 +60,7 @@ public class DiagramEditor {
         for (DEObject obj : selected) {
             obj.setSelected(false);
         }
+        draw();
     }
 
     private ArrayList<DEObject> getSelectedObjects() {
@@ -75,17 +77,24 @@ public class DiagramEditor {
         DEPoint mousePoint = new DEPoint(x, y);
 
         switch (action) {
-            case "dragged":
-                if (objectBeingDragged == null) {
-                    // may set it to null
-                    objectBeingDragged =
-                            getObjectWithMainNodeAtPoint(mouseDownPosition);
-                    objectBeingDragged.pickUp(mouseDownPosition);
-                }
-                break;
-
             case "pressed":
                 mouseDownPosition = mousePoint;
+                hasCheckedForObjectBeingDragged = false;
+                break;
+
+            case "dragged":
+                if (objectBeingDragged == null) {
+                    if (hasCheckedForObjectBeingDragged) return;
+                    // may set it to null
+                    objectBeingDragged =
+                            getObjectWithMainNodeAtPoint(mouseDownPosition, true);
+
+                    if (objectBeingDragged != null) {
+                        objectBeingDragged.pickUp(mouseDownPosition);
+                    } else {
+                        hasCheckedForObjectBeingDragged = true;
+                    }
+                }
                 break;
 
             case "released":
@@ -94,27 +103,41 @@ public class DiagramEditor {
                     objectBeingDragged = null;
                 }
                 mouseDownPosition = null;
+                hasCheckedForObjectBeingDragged = false;
                 draw();
                 break;
 
+            // Mouse pressed and then released without drag
             case "clicked":
-                attemptSelectAtPoint(mousePoint);
+                if (!attemptSelectAtPoint(mousePoint)) {
+                    deselectAllSelectedObjects();
+                }
                 mouseDownPosition = null;
                 objectBeingDragged = null;
                 break;
         }
     }
 
-    public void attemptSelectAtPoint(DEPoint mousePoint) {
+    /**
+     * @param mousePoint
+     * @return True if an object could be selected
+     */
+    public boolean attemptSelectAtPoint(DEPoint mousePoint) {
         deselectAllSelectedObjects();
-        getObjectWithMainNodeAtPoint(mousePoint).setSelected(true);
+
+        DEObject obj = getObjectWithMainNodeAtPoint(mousePoint, false);
+        if (obj == null) return false;
+
+        obj.setSelected(true);
         draw();
+        return true;
     }
 
-    public DEObject getObjectWithMainNodeAtPoint(DEPoint mousePoint) {
+    public DEObject getObjectWithMainNodeAtPoint(DEPoint mousePoint, boolean mustBeSelected) {
         for (DEObject obj : deObjects) {
             if (obj.isOnMainNode(mousePoint)) {
-                return obj;
+                if (!mustBeSelected || obj.isSelected())
+                    return obj;
             }
         }
 
