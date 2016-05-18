@@ -64,4 +64,8 @@ public abstract class DEObject {
         }
     }
 
+    public boolean isOnMainNode(DEPoint mousePoint) {
+        return mainNode.pointIsWithinBounds(mousePoint);
+    }
+
 }

@@ -11,7 +11,7 @@ public class DiagramEditor {
 
     /**
      * Contains DEGroup and DEObjectShape objects. They
-     * are sorted from bottom to top (where the top is
+     * are sorted from top to bottom (where the top is
      * the closest to the user).
      */
     ArrayList<DEObject> deObjects = new ArrayList<>();
@@ -32,7 +32,7 @@ public class DiagramEditor {
 
     private void addNewShape(DEObject obj) {
         obj.setSelected(true);
-        deObjects.add(obj);
+        deObjects.add(0, obj);
 
         draw();
     }
@@ -81,8 +81,22 @@ public class DiagramEditor {
             case "released":
                 break;
             case "clicked":
+                attemptSelectAtPoint(new DEPoint(x, y));
                 break;
         }
+    }
+
+    public void attemptSelectAtPoint(DEPoint mousePoint) {
+        deselectAllSelectedObjects();
+
+        for (DEObject obj : deObjects) {
+            if (obj.isOnMainNode(mousePoint)) {
+                obj.setSelected(true);
+                break;
+            }
+        }
+
+        draw();
     }
 
     public void addRectPressed() {
