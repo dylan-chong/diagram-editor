@@ -91,9 +91,11 @@ public class DiagramEditor {
 
                     if (objectBeingDragged != null) {
                         objectBeingDragged.pickUp(mouseDownPosition);
-                    } else {
-                        hasCheckedForObjectBeingDragged = true;
                     }
+
+                    hasCheckedForObjectBeingDragged = true;
+                } else {
+                    // TODO LATER MAYBE move the object with the mouse
                 }
                 break;
 
