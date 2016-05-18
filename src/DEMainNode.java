@@ -25,10 +25,6 @@ public class DEMainNode extends DENode {
     @Override
     public void draw() {
         // Do nothing
-
-        // TODO remove after making sure it works properly
-        UI.drawRect(bounds.getLeft(), bounds.getTop(),
-                bounds.getWidth(), bounds.getHeight());
         return;
     }
 
