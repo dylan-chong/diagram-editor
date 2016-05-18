@@ -71,56 +71,6 @@ public class DiagramEditor {
         return selected;
     }
 
-    // ************************* EVENTS ************************* //
-
-    public void doMouse(String action, double x, double y) {
-        DEPoint mousePoint = new DEPoint(x, y);
-
-        switch (action) {
-            case "pressed":
-                mouseDownPosition = mousePoint;
-                hasCheckedForObjectBeingDragged = false;
-                break;
-
-            case "dragged":
-                if (objectBeingDragged == null) {
-                    if (hasCheckedForObjectBeingDragged) return;
-                    // may set it to null
-                    objectBeingDragged =
-                            getObjectThatCanBeSelectedAtPoint(mouseDownPosition, true);
-
-
-                    if (objectBeingDragged != null) {
-                        objectBeingDragged.pickUp(mouseDownPosition);
-                    }
-
-                    hasCheckedForObjectBeingDragged = true;
-                } else {
-                    // TODO LATER MAYBE move the object with the mouse
-                }
-                break;
-
-            case "released":
-                if (objectBeingDragged != null) {
-                    objectBeingDragged.putDown(mousePoint);
-                    objectBeingDragged = null;
-                }
-                mouseDownPosition = null;
-                hasCheckedForObjectBeingDragged = false;
-                draw();
-                break;
-
-            // Mouse pressed and then released without drag
-            case "clicked":
-                if (!attemptSelectAtPoint(mousePoint)) {
-                    deselectAllSelectedObjects();
-                }
-                mouseDownPosition = null;
-                objectBeingDragged = null;
-                break;
-        }
-    }
-
     /**
      * @param mousePoint
      * @return True if an object could be selected
@@ -147,6 +97,73 @@ public class DiagramEditor {
         return null;
     }
 
+    // ************************* MOUSE EVENTS ************************* //
+
+    public void doMouse(String action, double x, double y) {
+        DEPoint mousePoint = new DEPoint(x, y);
+
+        switch (action) {
+            case "pressed":
+                mousePressed(mousePoint);
+                break;
+            case "dragged":
+                mouseDragged(mousePoint);
+                break;
+            case "released":
+                mouseReleased(mousePoint);
+                break;
+            case "clicked":
+                mouseClicked(mousePoint);
+                break;
+        }
+    }
+
+    private void mousePressed(DEPoint mousePoint) {
+        mouseDownPosition = mousePoint;
+        hasCheckedForObjectBeingDragged = false;
+    }
+
+    private void mouseDragged(DEPoint mousePoint) {
+        if (objectBeingDragged == null) {
+            if (hasCheckedForObjectBeingDragged) return;
+            // may set it to null
+            objectBeingDragged =
+                    getObjectThatCanBeSelectedAtPoint(mouseDownPosition, true);
+
+
+            if (objectBeingDragged != null) {
+                objectBeingDragged.pickUp(mouseDownPosition);
+            }
+
+            hasCheckedForObjectBeingDragged = true;
+        } else {
+            // TODO LATER MAYBE move the object with the mouse
+        }
+    }
+
+    private void mouseReleased(DEPoint mousePoint) {
+        if (objectBeingDragged != null) {
+            objectBeingDragged.putDown(mousePoint);
+            objectBeingDragged = null;
+        }
+        mouseDownPosition = null;
+        hasCheckedForObjectBeingDragged = false;
+        draw();
+    }
+
+    /**
+     * Mouse pressed and then released without drag
+     * @param mousePoint
+     */
+    private void mouseClicked(DEPoint mousePoint) {
+        if (!attemptSelectAtPoint(mousePoint)) {
+            deselectAllSelectedObjects();
+        }
+        mouseDownPosition = null;
+        objectBeingDragged = null;
+    }
+
+    // ************************* BUTTON EVENTS ************************* //
 
     public void addRectPressed() {
         deselectAllSelectedObjects();
