@@ -16,9 +16,10 @@ public class DENode implements DEDraggable {
     public static final double HEIGHT = WIDTH;
 
     protected DEPoint point;
+    protected DEBounds bounds;
 
     public DENode(DEPoint point) {
-        this.point = point;
+        setPoint(point);
     }
 
     public void draw() {
@@ -30,6 +31,8 @@ public class DENode implements DEDraggable {
 
     public void setPoint(DEPoint point) {
         this.point = point;
+        this.bounds = new DEBounds(point.getX() - WIDTH / 2,
+                point.getY() - WIDTH / 2, WIDTH, HEIGHT);
     }
 
     @Override
@@ -43,8 +46,7 @@ public class DENode implements DEDraggable {
     }
 
     @Override
-    public boolean pointIsWithinBounds(DEPoint point) {
-        // TODO: 17/05/16
-        return false;
+    public boolean pointIsWithinBounds(DEPoint mousePoint) {
+        return bounds.pointIsWithinBounds(mousePoint);
     }
 }

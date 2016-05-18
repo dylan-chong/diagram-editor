@@ -91,10 +91,21 @@ public abstract class DEObject implements DEDraggable {
         System.out.println("pick up");
     }
 
-    public boolean pointIsWithinBounds(DEPoint point) {
-        if (!bounds.pointIsWithinBounds(point)) return false;
+    /**
+     * @param mousePoint
+     * @return Returns true if mousePoint is within the bounds
+     * of this object, but not if mousePoint is on one of the
+     * nodes
+     */
+    public boolean pointIsWithinBounds(DEPoint mousePoint) {
+        if (!bounds.pointIsWithinBounds(mousePoint)) return false;
 
-        // TODO NEXT make sure the user isn't clicking on nodes
+        for (int n = 0; n < nodes.length; n++) {
+            DENode node = nodes[n];
+            if (node.pointIsWithinBounds(mousePoint)) {
+                return false;
+            }
+        }
 
         return true;
     }
