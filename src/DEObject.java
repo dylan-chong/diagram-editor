@@ -22,10 +22,7 @@ public abstract class DEObject implements DEDraggable {
     public DEObject(DEBounds bounds) {
         this.bounds = bounds;
         nodeCollection = new DEObjectNodeCollection(bounds,
-                newBounds -> {
-                    setBounds(newBounds);
-                    System.out.println("Update bounds: " + newBounds.toString());
-                });
+                newBounds -> setBounds(newBounds));
     }
 
     public boolean isSelected() {
@@ -44,7 +41,7 @@ public abstract class DEObject implements DEDraggable {
     public void draw() {
         if (isSelected()) nodeCollection.draw();
     }
-    
+
     // ******************** NODES ********************
 
     /**
