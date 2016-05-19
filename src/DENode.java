@@ -18,7 +18,10 @@ public class DENode implements DEDraggable {
     protected DEPoint point;
     protected DEBounds bounds;
 
-    public DENode(DEPoint point) {
+    private DENodePositionUpdateNotifier positionUpdater;
+
+    public DENode(DEPoint point, DENodePositionUpdateNotifier positionUpdater) {
+        this.positionUpdater = positionUpdater;
         setPoint(point);
     }
 
@@ -37,14 +40,14 @@ public class DENode implements DEDraggable {
 
     @Override
     public void pickUp(DEPoint mousePoint) {
-// TODO: 17/05/16 copy from object class
+
     }
 
     @Override
     public void followAlong(DEPoint mousePoint) {
-        // TODO
-    }
 
+    }
+//positionUpdater.positionWasUpdated();
     @Override
     public void putDown(DEPoint mousePoint) {
         // TODO: 17/05/16

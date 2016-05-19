@@ -52,10 +52,14 @@ public abstract class DEObject implements DEDraggable {
                 bounds.getMidBottom(),
         };
 
+        // TODO AFTER have proper position updates
+        DENodePositionUpdateNotifier positionUpdate = (DEPoint point)
+                -> System.out.println("Update position " + (100 * Math.random()));
+
         if (nodes == null) {
             nodes = new DENode[nodePoints.length];
             for (int n = 0; n < nodes.length; n++) {
-                nodes[n] = new DENode(nodePoints[n]);
+                    nodes[n] = new DENode(nodePoints[n], positionUpdate);
             }
 
             return;
