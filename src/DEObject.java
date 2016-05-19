@@ -123,22 +123,16 @@ public abstract class DEObject implements DEDraggable {
      * of this object, but not if mousePoint is on one of the
      * nodes
      */
-    public boolean pointIsWithinBounds(DEPoint mousePoint) {
+    private boolean pointIsWithinBounds(DEPoint mousePoint) {
         if (!bounds.pointIsWithinBounds(mousePoint)) return false;
 
         if (isSelected()) {
-            for (int n = 0; n < nodes.length; n++) {
-                DENode node = nodes[n];
-                if (node.pointIsWithinBounds(mousePoint)) {
-                    return false;
-                }
-            }
+            DENode nodeAtPoint = getNodeAtPoint(mousePoint);
+            if (nodeAtPoint != null) return false;
         }
 
         return true;
     }
-
-    // TODO LATER make this an interface?
 
     public boolean canSelectAtPoint(DEPoint point) {
         if (isSelected()) return false;

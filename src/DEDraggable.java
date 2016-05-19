@@ -12,8 +12,6 @@ public interface DEDraggable {
 
     void putDown(DEPoint mousePoint);
 
-    boolean pointIsWithinBounds(DEPoint point);
-
     /**
      * @param point
      * @return Returns the object itself, or a different
