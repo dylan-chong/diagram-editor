@@ -6,7 +6,6 @@
  */
 public class DEDraggableBoundsCalculator {
 
-    // TODO NEXT move the DEObject new position calculation code here
     // TODO AFTER use this class in DENode
 
     private DEBounds currentBounds;
@@ -26,7 +25,7 @@ public class DEDraggableBoundsCalculator {
     public DEBounds getNewBoundsForMousePoint(DEPoint mousePoint) {
         double mouseXDiff = mousePoint.getX() - originalMousePoint.getX();
         double mouseYDiff = mousePoint.getY() - originalMousePoint.getY();
-        
+
         return new DEBounds(currentBounds.getLeft() + mouseXDiff,
                 currentBounds.getTop() + mouseYDiff,
                 currentBounds.getWidth(), currentBounds.getHeight());
