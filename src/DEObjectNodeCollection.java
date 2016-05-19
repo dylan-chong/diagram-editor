@@ -124,9 +124,7 @@ public class DEObjectNodeCollection {
 
     private void nodeWasMoved(DENode node) {
         resize(node);
-
-        DEBounds newBounds = new DEBounds(Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100);
-        boundsUpdater.updateBounds(newBounds);
+        boundsUpdater.updateBounds(objectBounds);
     }
 
     /**
@@ -135,6 +133,7 @@ public class DEObjectNodeCollection {
      * This method doesn't call setObjectBounds() directly;
      * when calling boundsUpdater.updateBounds(), that calls
      * the setter anyway.
+     *
      * @param node
      */
     private void resize(DENode node) {
