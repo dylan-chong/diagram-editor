@@ -15,8 +15,7 @@ public abstract class DEObjectShape extends DEObject {
     protected Color edgeColor = DEFAULT_EDGE_COLOR;
 
     public DEObjectShape(DEBounds bounds) {
-        this.bounds = bounds;
-        resetAllNodePoints();
+        super(bounds);
     }
 
     public String toString() {

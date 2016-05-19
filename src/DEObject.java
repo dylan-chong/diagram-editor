@@ -7,8 +7,7 @@
 public abstract class DEObject implements DEDraggable {
 
     protected DEBounds bounds;
-
-    private DENode[] nodes; //TODO LATER split into edge and corner nodes
+    private DEObjectNodeCollection nodeCollection;
     private boolean isSelected;
 
     /**
@@ -19,7 +18,15 @@ public abstract class DEObject implements DEDraggable {
      */
 
     private DEDraggableBoundsCalculator boundsCalculator;
-    private DEPoint pickUpRelativePoint;
+
+    public DEObject(DEBounds bounds) {
+        this.bounds = bounds;
+        nodeCollection = new DEObjectNodeCollection(bounds,
+                newBounds -> {
+                    setBounds(newBounds);
+                    System.out.println("Update bounds: " + newBounds.toString());
+                });
+    }
 
     public boolean isSelected() {
         return isSelected;
@@ -31,53 +38,15 @@ public abstract class DEObject implements DEDraggable {
 
     private void setBounds(DEBounds bounds) {
         this.bounds = bounds;
-        resetAllNodePoints();
+        nodeCollection.setObjectBounds(bounds);
     }
 
     public void draw() {
-        if (isSelected()) drawAllNodes();
+        if (isSelected()) nodeCollection.draw();
     }
 
-    protected void drawAllNodes() {
-        for (DENode n : nodes) {
-            n.draw();
-        }
-    }
 
     // ******************** NODES ********************
-
-    protected void resetAllNodePoints() {
-        DEPoint[] nodePoints = new DEPoint[]{
-                // Corners
-                bounds.getTopLeft(),
-                bounds.getTopRight(),
-                bounds.getBottomLeft(),
-                bounds.getBottomRight(),
-
-                // Edges
-                bounds.getMidLeft(),
-                bounds.getMidRight(),
-                bounds.getMidTop(),
-                bounds.getMidBottom(),
-        };
-
-        // TODO NEXT have proper position updates
-        DENodePositionUpdateNotifier positionUpdate = (DEPoint point)
-                -> System.out.println("Update position " + (100 * Math.random()));
-
-        if (nodes == null) {
-            nodes = new DENode[nodePoints.length];
-            for (int n = 0; n < nodes.length; n++) {
-                nodes[n] = new DENode(nodePoints[n], positionUpdate);
-            }
-
-            return;
-        }
-
-        for (int n = 0; n < nodes.length; n++) {
-            nodes[n].setPoint(nodePoints[n]);
-        }
-    }
 
     /**
      * @param point
@@ -86,16 +55,7 @@ public abstract class DEObject implements DEDraggable {
      */
     private DENode getNodeAtPoint(DEPoint point) {
         if (!isSelected()) return null;
-
-        for (int n = 0; n < nodes.length; n++) {
-            DENode node = nodes[n];
-            if (node.getDraggableDraggableAtPoint(point) == node) {
-                // Point is within node bounds
-                return node;
-            }
-        }
-
-        return null;
+        return nodeCollection.getNodeAtPoint(point); // may be null
     }
 
     // ******************** DRAGGING SHAPE AROUND ********************
