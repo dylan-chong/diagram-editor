@@ -26,10 +26,9 @@ public class DENode implements DEDraggable {
     }
 
     public void draw() {
-        double left = point.getX() - (WIDTH / 2);
-        double top = point.getY() - (HEIGHT / 2);
         UI.setColor(COLOR);
-        UI.drawRect(left, top, WIDTH, HEIGHT);
+        UI.drawRect(bounds.getLeft(), bounds.getTop(),
+                bounds.getWidth(), bounds.getHeight());
     }
 
     public void setPoint(DEPoint point) {
