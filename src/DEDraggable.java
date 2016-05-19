@@ -6,8 +6,16 @@
  */
 public interface DEDraggable {
 
-    void putDown(DEPoint mousePoint);
     void pickUp(DEPoint mousePoint);
+    void followAlong(DEPoint mousePoint);
+    void putDown(DEPoint mousePoint);
+
     boolean pointIsWithinBounds(DEPoint point);
 
+    /**
+     * Returns the object itself, or a different
+     * draggable that is part of this object (e.g.
+     * a node).
+     */
+    // TODO NEXT add a getDraggable method
 }

@@ -46,6 +46,11 @@ public class DENode implements DEDraggable {
     }
 
     @Override
+    public void followAlong(DEPoint mousePoint) {
+
+    }
+
+    @Override
     public boolean pointIsWithinBounds(DEPoint mousePoint) {
         return bounds.pointIsWithinBounds(mousePoint);
     }

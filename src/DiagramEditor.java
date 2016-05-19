@@ -137,8 +137,10 @@ public class DiagramEditor {
 
             hasCheckedForObjectBeingDragged = true;
         } else {
-            // TODO LATER MAYBE move the object with the mouse
+            objectBeingDragged.followAlong(mousePoint);
         }
+
+        draw();
     }
 
     private void mouseReleased(DEPoint mousePoint) {

@@ -73,22 +73,28 @@ public abstract class DEObject implements DEDraggable {
 
     // Dragging shape around
 
+    public void pickUp(DEPoint mousePoint) {
+        pickUpRelativePoint = new DEPoint(mousePoint.getX() - bounds.getLeft(),
+                mousePoint.getY() - bounds.getTop());
+    }
+
     public void putDown(DEPoint mousePoint) {
-//        mainNode.putDown(mousePoint); TODO make the nodes move with the mouse
+        followOrPutDownAtMousePoint(mousePoint);
+        pickUpRelativePoint = null;
+    }
+
+    @Override
+    public void followAlong(DEPoint mousePoint) {
+        followOrPutDownAtMousePoint(mousePoint);
+    }
+
+    private void followOrPutDownAtMousePoint(DEPoint mousePoint) {
         DEPoint newTopLeft = new DEPoint(mousePoint.getX() - pickUpRelativePoint.getX(),
                 mousePoint.getY() - pickUpRelativePoint.getY());
         DEPoint newBottomRight = new DEPoint(newTopLeft.getX() + bounds.getWidth(),
                 newTopLeft.getY() + bounds.getHeight());
 
         setBounds(new DEBounds(newTopLeft, newBottomRight));
-
-        System.out.println("pick up");
-    }
-
-    public void pickUp(DEPoint mousePoint) {
-        pickUpRelativePoint = new DEPoint(mousePoint.getX() - bounds.getLeft(),
-                mousePoint.getY() - bounds.getTop());
-        System.out.println("pick up");
     }
 
     /**
