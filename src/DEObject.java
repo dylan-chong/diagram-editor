@@ -17,6 +17,8 @@ public abstract class DEObject implements DEDraggable {
      * pickUpRelativePoint is of the mouse to the top left
      * of this object's top left
      */
+
+    DEDraggableBoundsCalculator boundsCalculator;
     private DEPoint pickUpRelativePoint;
 
     public boolean isSelected() {
@@ -99,8 +101,7 @@ public abstract class DEObject implements DEDraggable {
     public void pickUp(DEPoint mousePoint) {
         assert isSelected : "Cannot pick up DEObject unless selected";
         assert pointIsWithinBounds(mousePoint) : "Can't pick up from a location not in bounds";
-        pickUpRelativePoint = new DEPoint(mousePoint.getX() - bounds.getLeft(),
-                mousePoint.getY() - bounds.getTop());
+        boundsCalculator = new DEDraggableBoundsCalculator(mousePoint, bounds);
     }
 
     @Override
@@ -110,16 +111,11 @@ public abstract class DEObject implements DEDraggable {
 
     public void putDown(DEPoint mousePoint) {
         followOrPutDownAtMousePoint(mousePoint);
-        pickUpRelativePoint = null;
+        boundsCalculator = null;
     }
 
     private void followOrPutDownAtMousePoint(DEPoint mousePoint) {
-        DEPoint newTopLeft = new DEPoint(mousePoint.getX() - pickUpRelativePoint.getX(),
-                mousePoint.getY() - pickUpRelativePoint.getY());
-        DEPoint newBottomRight = new DEPoint(newTopLeft.getX() + bounds.getWidth(),
-                newTopLeft.getY() + bounds.getHeight());
-
-        setBounds(new DEBounds(newTopLeft, newBottomRight));
+        setBounds(boundsCalculator.getNewBoundsForMousePoint(mousePoint));
     }
 
     /**
