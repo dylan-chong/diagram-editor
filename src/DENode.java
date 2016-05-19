@@ -50,13 +50,15 @@ public class DENode implements DEDraggable {
         // TODO: 17/05/16
     }
 
+    /**
+     * @param point
+     * @return Always returns this if the point is within this's
+     * bounds
+     */
     @Override
     public DEDraggable getDraggableDraggableAtPoint(DEPoint point) {
-        // TODO
+        if (bounds.pointIsWithinBounds(point)) return this;
         return null;
     }
-
-    public boolean pointIsWithinBounds(DEPoint mousePoint) {
-        return bounds.pointIsWithinBounds(mousePoint);
-    }
 }
+

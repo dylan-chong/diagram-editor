@@ -150,7 +150,8 @@ public abstract class DEObject implements DEDraggable {
 
         for (int n = 0; n < nodes.length; n++) {
             DENode node = nodes[n];
-            if (node.pointIsWithinBounds(point)) {
+            if (node.getDraggableDraggableAtPoint(point) == node) {
+                // Point is within node bounds
                 return node;
             }
         }
