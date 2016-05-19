@@ -3,15 +3,16 @@
  */
 public class DEObjectNodeCollection {
 
-    public static final int NODE_TOP_LEFT = 0;
-    public static final int NODE_TOP_RIGHT = 1;
-    public static final int NODE_BOTTOM_LEFT = 2;
-    public static final int NODE_BOTTOM_RIGHT = 3;
+    private static final int NODE_TOP_LEFT = 0;
+    private static final int NODE_TOP_RIGHT = 1;
+    private static final int NODE_BOTTOM_LEFT = 2;
+    private static final int NODE_BOTTOM_RIGHT = 3;
 
-    public static final int NODE_MID_LEFT = 4;
-    public static final int NODE_MID_RIGHT = 5;
-    public static final int NODE_MID_TOP = 6;
-    public static final int NODE_MID_BOTTOM = 7;
+    private static final int NODE_MID_LEFT = 4;
+    private static final int NODE_MID_RIGHT = 5;
+    private static final int NODE_MID_TOP = 6;
+    private static final int NODE_MID_BOTTOM = 7;
+
 
     private DENode[] nodes; //TODO LATER split into edge and corner nodes
     private DEBounds objectBounds;
