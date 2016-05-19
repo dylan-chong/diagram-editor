@@ -104,6 +104,25 @@ public class DEObjectNodeCollection {
         boundsUpdater.updateBounds(newBounds);
     }
 
+    /**
+     * Calculates the new bounds and tells this instance's
+     * owner to update the size based on these new bounds.
+     * This method doesn't call setObjectBounds() directly;
+     * when calling boundsUpdater.updateBounds(), that calls
+     * the setter anyway.
+     * @param node
+     */
+    private void resize(DENode node) {
+        int nodeConstant = getNodeConstant(node);
+        int oppositeConstant = getOppositeNodeConstant(nodeConstant);
+
+        DEPoint nodePoint = node.getPoint();
+        DEPoint oppositeNodePoint = nodes[oppositeConstant].getPoint();
+
+        DEBounds newBounds = new DEBounds(nodePoint, oppositeNodePoint);
+        boundsUpdater.updateBounds(newBounds);
+    }
+
     private void updateNodePoints() {
         DEPoint[] nodePoints = getNodePoints(objectBounds);
 
