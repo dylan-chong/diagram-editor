@@ -32,6 +32,10 @@ public class DENode implements DEDraggable {
                 bounds.getWidth(), bounds.getHeight());
     }
 
+    public DEPoint getPoint() {
+        return point;
+    }
+
     public void setPoint(DEPoint point) {
         this.point = point;
         this.bounds = new DEBounds(point.getX() - WIDTH / 2,
@@ -54,11 +58,6 @@ public class DENode implements DEDraggable {
         boundsCalculator = null;
     }
 
-    private void followOrPutDownAtMousePoint(DEPoint mousePoint) {
-        DEPoint newPoint = boundsCalculator.getNewBoundsForMousePoint(mousePoint).getCenter();
-        setPoint(newPoint);
-        positionUpdater.positionWasUpdated(newPoint, this);
-    }
     /**
      * @param point
      * @return Always returns this if the point is within this's
@@ -68,6 +67,12 @@ public class DENode implements DEDraggable {
     public DEDraggable getDraggableDraggableAtPoint(DEPoint point) {
         if (bounds.pointIsWithinBounds(point)) return this;
         return null;
+    }
+
+    private void followOrPutDownAtMousePoint(DEPoint mousePoint) {
+        DEPoint newPoint = boundsCalculator.getNewBoundsForMousePoint(mousePoint).getCenter();
+        setPoint(newPoint);
+        positionUpdater.positionWasUpdated(newPoint, this);
     }
 }
 
