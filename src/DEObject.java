@@ -93,6 +93,7 @@ public abstract class DEObject implements DEDraggable {
 
     public void pickUp(DEPoint mousePoint) {
         assert isSelected : "Cannot pick up DEObject unless selected";
+        assert pointIsWithinBounds(mousePoint) : "Can't pick up from a location not in bounds";
         pickUpRelativePoint = new DEPoint(mousePoint.getX() - bounds.getLeft(),
                 mousePoint.getY() - bounds.getTop());
     }
@@ -123,13 +124,14 @@ public abstract class DEObject implements DEDraggable {
      * nodes
      */
     public boolean pointIsWithinBounds(DEPoint mousePoint) {
-        // TODO AFTER no need for using point is within bounds
         if (!bounds.pointIsWithinBounds(mousePoint)) return false;
 
-        for (int n = 0; n < nodes.length; n++) {
-            DENode node = nodes[n];
-            if (node.pointIsWithinBounds(mousePoint)) {
-                return false;
+        if (isSelected()) {
+            for (int n = 0; n < nodes.length; n++) {
+                DENode node = nodes[n];
+                if (node.pointIsWithinBounds(mousePoint)) {
+                    return false;
+                }
             }
         }
 
@@ -144,7 +146,14 @@ public abstract class DEObject implements DEDraggable {
         return false;
     }
 
+    /**
+     * @param point
+     * @return The node at the point, but only if this
+     * is selected
+     */
     private DENode getNodeAtPoint(DEPoint point) {
+        if (!isSelected()) return null;
+
         for (int n = 0; n < nodes.length; n++) {
             DENode node = nodes[n];
             if (node.pointIsWithinBounds(point)) {
