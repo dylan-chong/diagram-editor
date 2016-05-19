@@ -53,7 +53,26 @@ public class DEObjectNodeCollection {
      * end of the bounds.
      */
     private static int getOppositeNodeConstant(int constant) {
-        
+        switch (constant) {
+            case NODE_TOP_LEFT:
+                return NODE_BOTTOM_RIGHT;
+            case NODE_TOP_RIGHT:
+                return NODE_BOTTOM_LEFT;
+            case NODE_BOTTOM_LEFT:
+                return NODE_TOP_RIGHT;
+            case NODE_BOTTOM_RIGHT:
+                return NODE_TOP_LEFT;
+
+            case NODE_MID_LEFT:
+                return NODE_MID_RIGHT;
+            case NODE_MID_RIGHT:
+                return NODE_MID_LEFT;
+            case NODE_MID_TOP:
+                return NODE_MID_BOTTOM;
+            case NODE_MID_BOTTOM:
+                return NODE_MID_TOP;
+        }
+        throw new Error("Not a valid node constant: " + constant);
     }
 
     public void draw() {
