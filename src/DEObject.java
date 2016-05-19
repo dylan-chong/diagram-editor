@@ -29,6 +29,11 @@ public abstract class DEObject implements DEDraggable {
         isSelected = selected;
     }
 
+    private void setBounds(DEBounds bounds) {
+        this.bounds = bounds;
+        resetAllNodePoints();
+    }
+
     public void draw() {
         if (isSelected()) drawAllNodes();
     }
@@ -38,6 +43,8 @@ public abstract class DEObject implements DEDraggable {
             n.draw();
         }
     }
+
+    // ******************** NODES ********************
 
     protected void resetAllNodePoints() {
         DEPoint[] nodePoints = new DEPoint[]{
@@ -54,7 +61,7 @@ public abstract class DEObject implements DEDraggable {
                 bounds.getMidBottom(),
         };
 
-        // TODO AFTER have proper position updates
+        // TODO NEXT have proper position updates
         DENodePositionUpdateNotifier positionUpdate = (DEPoint point)
                 -> System.out.println("Update position " + (100 * Math.random()));
 
@@ -72,12 +79,26 @@ public abstract class DEObject implements DEDraggable {
         }
     }
 
-    private void setBounds(DEBounds bounds) {
-        this.bounds = bounds;
-        resetAllNodePoints();
+    /**
+     * @param point
+     * @return The node at the point, but only if this
+     * is selected
+     */
+    private DENode getNodeAtPoint(DEPoint point) {
+        if (!isSelected()) return null;
+
+        for (int n = 0; n < nodes.length; n++) {
+            DENode node = nodes[n];
+            if (node.getDraggableDraggableAtPoint(point) == node) {
+                // Point is within node bounds
+                return node;
+            }
+        }
+
+        return null;
     }
 
-    // Dragging shape around
+    // ******************** DRAGGING SHAPE AROUND ********************
 
     /**
      * @param point
@@ -139,25 +160,6 @@ public abstract class DEObject implements DEDraggable {
         if (isSelected()) return false;
         if (bounds.pointIsWithinBounds(point)) return true;
         return false;
-    }
-
-    /**
-     * @param point
-     * @return The node at the point, but only if this
-     * is selected
-     */
-    private DENode getNodeAtPoint(DEPoint point) {
-        if (!isSelected()) return null;
-
-        for (int n = 0; n < nodes.length; n++) {
-            DENode node = nodes[n];
-            if (node.getDraggableDraggableAtPoint(point) == node) {
-                // Point is within node bounds
-                return node;
-            }
-        }
-
-        return null;
     }
 
 }
