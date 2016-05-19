@@ -44,8 +44,7 @@ public abstract class DEObject implements DEDraggable {
     public void draw() {
         if (isSelected()) nodeCollection.draw();
     }
-
-
+    
     // ******************** NODES ********************
 
     /**

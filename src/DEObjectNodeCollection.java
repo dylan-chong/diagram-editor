@@ -64,17 +64,15 @@ public class DEObjectNodeCollection {
     private void createNodes(DEPoint[] nodePoints) {
         nodes = new DENode[nodePoints.length];
 
-        DENodePositionUpdater positionUpdate = (DEPoint point, DENode node) -> nodeWasMoved(point, node);
+        DENodePositionUpdater positionUpdate = (DENode node) -> nodeWasMoved(node);
 
         for (int n = 0; n < nodes.length; n++) {
             nodes[n] = new DENode(nodePoints[n], positionUpdate);
         }
     }
 
-    private void nodeWasMoved(DEPoint nodePoint, DENode node) {
-        System.out.println("Update position " + nodePoint.toString());
-
-        // TODO AFTER have proper position updates
+    private void nodeWasMoved(DENode node) {
+        resize(node);
 
         DEBounds newBounds = new DEBounds(Math.random() * 100, Math.random() * 100, Math.random() * 100, Math.random() * 100);
         boundsUpdater.updateBounds(newBounds);

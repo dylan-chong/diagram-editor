@@ -3,6 +3,6 @@
  */
 public interface DENodePositionUpdater {
 
-    void positionWasUpdated(DEPoint newPosition, DENode node);
+    void positionWasUpdated(DENode node);
 
 }

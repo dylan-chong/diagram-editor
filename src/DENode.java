@@ -72,7 +72,7 @@ public class DENode implements DEDraggable {
     private void followOrPutDownAtMousePoint(DEPoint mousePoint) {
         DEPoint newPoint = boundsCalculator.getNewBoundsForMousePoint(mousePoint).getCenter();
         setPoint(newPoint);
-        positionUpdater.positionWasUpdated(newPoint, this);
+        positionUpdater.positionWasUpdated(this);
     }
 }
 
