@@ -17,7 +17,7 @@ public class DiagramEditor {
     private ArrayList<DEObject> deObjects = new ArrayList<>();
     private DiagramEditorOutput output;
 
-    private DEPoint mouseDownPosition;
+    private DEPoint mouseDownPoint;
     private DEDraggable objectBeingDragged;
     private boolean hasCheckedForObjectBeingDragged;
 
@@ -92,18 +92,16 @@ public class DiagramEditor {
     /**
      * Finds something on the screen to drag (must be a Draggable
      * that is under the mouse)
+     *
      * @param mousePoint
-     * @param mustBeSelected
      * @return
      */
-    public DEDraggable getDraggableDraggableAtPoint(DEPoint mousePoint, boolean mustBeSelected) { // TODO AFTER remove boolean parameter
+    public DEDraggable getDraggableDraggableAtPoint(DEPoint mousePoint) { // TODO AFTER remove boolean parameter
         for (DEObject obj : deObjects) {
-            if (obj.pointIsWithinBounds(mousePoint)) {
-                DEDraggable draggable = obj.getDraggableDraggableAtPoint(mousePoint);
-                if (draggable == null) continue;
+            DEDraggable draggable = obj.getDraggableDraggableAtPoint(mousePoint);
+            if (draggable == null) continue;
 
-                return draggable;
-            }
+            return draggable;
         }
 
         return null;
@@ -131,7 +129,7 @@ public class DiagramEditor {
     }
 
     private void mousePressed(DEPoint mousePoint) {
-        mouseDownPosition = mousePoint;
+        mouseDownPoint = mousePoint;
         hasCheckedForObjectBeingDragged = false;
     }
 
@@ -140,11 +138,11 @@ public class DiagramEditor {
             if (hasCheckedForObjectBeingDragged) return;
             // may set it to null
             objectBeingDragged =
-                    getDraggableDraggableAtPoint(mouseDownPosition, true);
+                    getDraggableDraggableAtPoint(mouseDownPoint);
 
 
             if (objectBeingDragged != null) {
-                objectBeingDragged.pickUp(mouseDownPosition);
+                objectBeingDragged.pickUp(mouseDownPoint);
             }
 
             hasCheckedForObjectBeingDragged = true;
@@ -160,20 +158,21 @@ public class DiagramEditor {
             objectBeingDragged.putDown(mousePoint);
             objectBeingDragged = null;
         }
-        mouseDownPosition = null;
+        mouseDownPoint = null;
         hasCheckedForObjectBeingDragged = false;
         draw();
     }
 
     /**
      * Mouse pressed and then released without drag
+     *
      * @param mousePoint
      */
     private void mouseClicked(DEPoint mousePoint) {
         if (!attemptSelectAtPoint(mousePoint)) {
             deselectAllSelectedObjects();
         }
-        mouseDownPosition = null;
+        mouseDownPoint = null;
         objectBeingDragged = null;
     }
 
