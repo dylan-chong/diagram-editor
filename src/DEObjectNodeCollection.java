@@ -47,6 +47,24 @@ public class DEObjectNodeCollection {
         return nodePoints;
     }
 
+    /**
+     * @param node
+     * @return Returns one of the NODE_x_x constants that matches
+     * the given node. Returns -1 if the constant can't be found
+     */
+    private static int getNodeConstant(DENode node) {
+
+    }
+
+    /**
+     * @param constant
+     * @return Returns the constant for the node at the opposite
+     * end of the bounds.
+     */
+    private static int getOppositeNodeConstant(int constant) {
+        
+    }
+
     public void draw() {
         for (DENode n : nodes) {
             n.draw();
