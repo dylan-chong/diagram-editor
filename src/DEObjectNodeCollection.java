@@ -22,6 +22,13 @@ public class DEObjectNodeCollection {
         setObjectBounds(objectBounds);
     }
 
+    /**
+     * The order of the points matters. It follows the order
+     * of the NODE_x_x constants.
+     *
+     * @param bounds
+     * @return
+     */
     private static DEPoint[] getNodePoints(DEBounds bounds) {
         DEPoint[] nodePoints = new DEPoint[]{
                 // Corners
