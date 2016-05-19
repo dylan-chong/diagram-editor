@@ -48,15 +48,6 @@ public class DEObjectNodeCollection {
     }
 
     /**
-     * @param node
-     * @return Returns one of the NODE_x_x constants that matches
-     * the given node. Returns -1 if the constant can't be found
-     */
-    private static int getNodeConstant(DENode node) {
-
-    }
-
-    /**
      * @param constant
      * @return Returns the constant for the node at the opposite
      * end of the bounds.
@@ -95,6 +86,21 @@ public class DEObjectNodeCollection {
         for (int n = 0; n < nodes.length; n++) {
             nodes[n] = new DENode(nodePoints[n], positionUpdate);
         }
+    }
+
+    /**
+     * @param nodeToFind
+     * @return Returns one of the NODE_x_x constants that matches
+     * the given node. Crashes if the constant can't be found.
+     */
+    private int getNodeConstant(DENode nodeToFind) {
+        for (int n = 0; n < nodes.length; n++) {
+            DENode node = nodes[n];
+            if (node == nodeToFind)  // Intentional pointer matching
+                return n;
+        }
+
+        throw new Error("Node not found");
     }
 
     private void nodeWasMoved(DENode node) {
