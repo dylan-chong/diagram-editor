@@ -36,18 +36,24 @@ public class DENode implements DEDraggable {
     }
 
     @Override
+    public void pickUp(DEPoint mousePoint) {
+// TODO: 17/05/16 copy from object class
+    }
+
+    @Override
+    public void followAlong(DEPoint mousePoint) {
+        // TODO
+    }
+
+    @Override
     public void putDown(DEPoint mousePoint) {
         // TODO: 17/05/16
     }
 
     @Override
-    public void pickUp(DEPoint mousePoint) {
-// TODO: 17/05/16
-    }
-
-    @Override
-    public void followAlong(DEPoint mousePoint) {
-
+    public DEDraggable getDraggableDraggableAtPoint(DEPoint point) {
+        // TODO
+        return null;
     }
 
     @Override

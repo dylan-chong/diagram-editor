@@ -1,21 +1,29 @@
 /**
  * Created by Dylan on 17/05/16.
- *
+ * <p>
  * Functionality for something that can
  * be dragged to be moved on the screen
  */
 public interface DEDraggable {
 
     void pickUp(DEPoint mousePoint);
+
     void followAlong(DEPoint mousePoint);
+
     void putDown(DEPoint mousePoint);
 
     boolean pointIsWithinBounds(DEPoint point);
 
     /**
-     * Returns the object itself, or a different
+     * @param point
+     * @return Returns the object itself, or a different
      * draggable that is part of this object (e.g.
-     * a node).
+     * a node). Some Draggables may not want to be
+     * dragged sometimes - such as objects that
+     * haven't beeng selected yet.
+     *
+     * Returns null if there is no Draggable at the given
+     * point.
      */
-    // TODO NEXT add a getDraggable method
+    DEDraggable getDraggableDraggableAtPoint(DEPoint point);
 }

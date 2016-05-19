@@ -73,19 +73,38 @@ public abstract class DEObject implements DEDraggable {
 
     // Dragging shape around
 
-    public void pickUp(DEPoint mousePoint) {
-        pickUpRelativePoint = new DEPoint(mousePoint.getX() - bounds.getLeft(),
-                mousePoint.getY() - bounds.getTop());
+    /**
+     * @param point
+     * @return Primarily, a node (if this object is selected),
+     * otherwise itself if under the mouse, otherwise null
+     */
+    @Override
+    public DEDraggable getDraggableDraggableAtPoint(DEPoint point) {
+        if (isSelected()) {
+            DENode nodeAtPoint = getNodeAtPoint(point);
+            if (nodeAtPoint != null) return nodeAtPoint;
+        }
+
+        if (bounds.pointIsWithinBounds(point))
+            return this;
+
+        return null;
     }
 
-    public void putDown(DEPoint mousePoint) {
-        followOrPutDownAtMousePoint(mousePoint);
-        pickUpRelativePoint = null;
+    public void pickUp(DEPoint mousePoint) {
+        assert isSelected : "Cannot pick up DEObject unless selected";
+        pickUpRelativePoint = new DEPoint(mousePoint.getX() - bounds.getLeft(),
+                mousePoint.getY() - bounds.getTop());
     }
 
     @Override
     public void followAlong(DEPoint mousePoint) {
         followOrPutDownAtMousePoint(mousePoint);
+    }
+
+    public void putDown(DEPoint mousePoint) {
+        followOrPutDownAtMousePoint(mousePoint);
+        pickUpRelativePoint = null;
     }
 
     private void followOrPutDownAtMousePoint(DEPoint mousePoint) {
@@ -104,6 +123,7 @@ public abstract class DEObject implements DEDraggable {
      * nodes
      */
     public boolean pointIsWithinBounds(DEPoint mousePoint) {
+        // TODO AFTER no need for using point is within bounds
         if (!bounds.pointIsWithinBounds(mousePoint)) return false;
 
         for (int n = 0; n < nodes.length; n++) {
@@ -114,6 +134,25 @@ public abstract class DEObject implements DEDraggable {
         }
 
         return true;
+    }
+
+    // TODO LATER make this an interface?
+
+    public boolean canSelectAtPoint(DEPoint point) {
+        if (isSelected()) return false;
+        if (bounds.pointIsWithinBounds(point)) return true;
+        return false;
+    }
+
+    private DENode getNodeAtPoint(DEPoint point) {
+        for (int n = 0; n < nodes.length; n++) {
+            DENode node = nodes[n];
+            if (node.pointIsWithinBounds(point)) {
+                return node;
+            }
+        }
+
+        return null;
     }
 
 }

@@ -18,7 +18,7 @@ public class DiagramEditor {
     private DiagramEditorOutput output;
 
     private DEPoint mouseDownPosition;
-    private DEObject objectBeingDragged; // TODO LATER make this the node being dragged
+    private DEDraggable objectBeingDragged;
     private boolean hasCheckedForObjectBeingDragged;
 
     public DiagramEditor(DiagramEditorOutput output) {
@@ -78,22 +78,34 @@ public class DiagramEditor {
     public boolean attemptSelectAtPoint(DEPoint mousePoint) {
         deselectAllSelectedObjects();
 
-        DEObject obj = getObjectThatCanBeSelectedAtPoint(mousePoint, false);
-        if (obj == null) return false;
-
-        obj.setSelected(true);
-
-        draw();
-        return true;
-    }
-
-    public DEObject getObjectThatCanBeSelectedAtPoint(DEPoint mousePoint, boolean mustBeSelected) {
         for (DEObject obj : deObjects) {
-            if (obj.pointIsWithinBounds(mousePoint)) {
-                if (!mustBeSelected || obj.isSelected())
-                    return obj;
+            if (obj.canSelectAtPoint(mousePoint)) {
+                obj.setSelected(true);
+                draw();
+                return true;
             }
         }
+
+        return false;
+    }
+
+    /**
+     * Finds something on the screen to drag (must be a Draggable
+     * that is under the mouse)
+     * @param mousePoint
+     * @param mustBeSelected
+     * @return
+     */
+    public DEDraggable getDraggableDraggableAtPoint(DEPoint mousePoint, boolean mustBeSelected) { // TODO AFTER remove boolean parameter
+        for (DEObject obj : deObjects) {
+            if (obj.pointIsWithinBounds(mousePoint)) {
+                DEDraggable draggable = obj.getDraggableDraggableAtPoint(mousePoint);
+                if (draggable == null) continue;
+
+                return draggable;
+            }
+        }
+
         return null;
     }
 
@@ -128,7 +140,7 @@ public class DiagramEditor {
             if (hasCheckedForObjectBeingDragged) return;
             // may set it to null
             objectBeingDragged =
-                    getObjectThatCanBeSelectedAtPoint(mouseDownPosition, true);
+                    getDraggableDraggableAtPoint(mouseDownPosition, true);
 
 
             if (objectBeingDragged != null) {
