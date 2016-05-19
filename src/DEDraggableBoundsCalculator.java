@@ -1,5 +1,8 @@
 /**
  * Created by Dylan on 19/05/16.
+ *
+ * Calculates the new bounds that an object when, and after,
+ * it is dragged.
  */
 public class DEDraggableBoundsCalculator {
 
