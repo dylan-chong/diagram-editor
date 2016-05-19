@@ -6,8 +6,6 @@
  */
 public class DEDraggableBoundsCalculator {
 
-    // TODO AFTER use this class in DENode
-
     private DEBounds currentBounds;
     private DEPoint originalMousePoint, pickUpRelativePoint;
 

@@ -18,7 +18,7 @@ public abstract class DEObject implements DEDraggable {
      * of this object's top left
      */
 
-    DEDraggableBoundsCalculator boundsCalculator;
+    private DEDraggableBoundsCalculator boundsCalculator;
     private DEPoint pickUpRelativePoint;
 
     public boolean isSelected() {

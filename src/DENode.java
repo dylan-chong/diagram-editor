@@ -19,6 +19,7 @@ public class DENode implements DEDraggable {
     protected DEBounds bounds;
 
     private DENodePositionUpdateNotifier positionUpdater;
+    private DEDraggableBoundsCalculator boundsCalculator;
 
     public DENode(DEPoint point, DENodePositionUpdateNotifier positionUpdater) {
         this.positionUpdater = positionUpdater;
@@ -39,19 +40,24 @@ public class DENode implements DEDraggable {
 
     @Override
     public void pickUp(DEPoint mousePoint) {
-
+        boundsCalculator = new DEDraggableBoundsCalculator(mousePoint, bounds);
     }
 
     @Override
     public void followAlong(DEPoint mousePoint) {
-
+        followOrPutDownAtMousePoint(mousePoint);
     }
-//positionUpdater.positionWasUpdated();
+
     @Override
     public void putDown(DEPoint mousePoint) {
-        // TODO: 17/05/16
+        followOrPutDownAtMousePoint(mousePoint);
+        boundsCalculator = null;
     }
 
+    private void followOrPutDownAtMousePoint(DEPoint mousePoint) {
+        setPoint(boundsCalculator.getNewBoundsForMousePoint(mousePoint).getCenter());
+        positionUpdater.positionWasUpdated(point);
+    }
     /**
      * @param point
      * @return Always returns this if the point is within this's
