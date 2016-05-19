@@ -8,13 +8,13 @@ public class DEObjectNodeCollection {
     private static final int NODE_BOTTOM_LEFT = 2;
     private static final int NODE_BOTTOM_RIGHT = 3;
 
-    private static final int NODE_MID_LEFT = 4;
-    private static final int NODE_MID_RIGHT = 5;
-    private static final int NODE_MID_TOP = 6;
-    private static final int NODE_MID_BOTTOM = 7;
+//    private static final int NODE_MID_LEFT = 4;
+//    private static final int NODE_MID_RIGHT = 5;
+//    private static final int NODE_MID_TOP = 6;
+//    private static final int NODE_MID_BOTTOM = 7;
 
 
-    private DENode[] nodes; //TODO LATER split into edge and corner nodes
+    private DENode[] nodes;
     private DEBounds objectBounds;
     private DEObjectBoundsUpdater boundsUpdater;
 
@@ -39,10 +39,10 @@ public class DEObjectNodeCollection {
                 bounds.getBottomRight(),
 
                 // Edges
-                bounds.getMidLeft(),
-                bounds.getMidRight(),
-                bounds.getMidTop(),
-                bounds.getMidBottom(),
+//                bounds.getMidLeft(),
+//                bounds.getMidRight(),
+//                bounds.getMidTop(),
+//                bounds.getMidBottom(),
         };
         return nodePoints;
     }
@@ -63,14 +63,14 @@ public class DEObjectNodeCollection {
             case NODE_BOTTOM_RIGHT:
                 return NODE_TOP_LEFT;
 
-            case NODE_MID_LEFT:
-                return NODE_MID_RIGHT;
-            case NODE_MID_RIGHT:
-                return NODE_MID_LEFT;
-            case NODE_MID_TOP:
-                return NODE_MID_BOTTOM;
-            case NODE_MID_BOTTOM:
-                return NODE_MID_TOP;
+//            case NODE_MID_LEFT:
+//                return NODE_MID_RIGHT;
+//            case NODE_MID_RIGHT:
+//                return NODE_MID_LEFT;
+//            case NODE_MID_TOP:
+//                return NODE_MID_BOTTOM;
+//            case NODE_MID_BOTTOM:
+//                return NODE_MID_TOP;
         }
         throw new Error("Not a valid node constant: " + constant);
     }
