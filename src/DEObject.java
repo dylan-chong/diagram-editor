@@ -59,7 +59,7 @@ public abstract class DEObject implements DEDraggable {
         if (nodes == null) {
             nodes = new DENode[nodePoints.length];
             for (int n = 0; n < nodes.length; n++) {
-                    nodes[n] = new DENode(nodePoints[n], positionUpdate);
+                nodes[n] = new DENode(nodePoints[n], positionUpdate);
             }
 
             return;
@@ -79,15 +79,16 @@ public abstract class DEObject implements DEDraggable {
 
     /**
      * @param point
-     * @return Primarily, a node (if this object is selected),
-     * otherwise itself if under the mouse, otherwise null
+     * @return False if the object is not selected. Otherwise,
+     * it will primarily return a node, otherwise itself. (Nodes
+     * overlap slightly with the object)
      */
     @Override
     public DEDraggable getDraggableDraggableAtPoint(DEPoint point) {
-        if (isSelected()) {
-            DENode nodeAtPoint = getNodeAtPoint(point);
-            if (nodeAtPoint != null) return nodeAtPoint;
-        }
+        if (!isSelected()) return null;
+
+        DENode nodeAtPoint = getNodeAtPoint(point);
+        if (nodeAtPoint != null) return nodeAtPoint;
 
         if (bounds.pointIsWithinBounds(point))
             return this;
