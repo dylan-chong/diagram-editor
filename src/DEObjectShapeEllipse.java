@@ -11,17 +11,15 @@ public class DEObjectShapeEllipse extends DEObjectShape {
 
     @Override
     public void draw() {
-        double w = bounds.getRight() - bounds.getLeft();
-        double h = bounds.getBottom() - bounds.getTop();
-
         assert fillColor != null || edgeColor != null : "Fill and edge color can't both be transparent";
+
         if (fillColor != null) {
             UI.setColor(fillColor);
-            UI.fillOval(bounds.getLeft(), bounds.getTop(), w, h);
+            UI.fillOval(bounds.getLeft(), bounds.getTop(), bounds.getWidth(), bounds.getHeight());
         }
         if (edgeColor != null) {
             UI.setColor(edgeColor);
-            UI.drawOval(bounds.getLeft(), bounds.getTop(), w, h);
+            UI.drawOval(bounds.getLeft(), bounds.getTop(), bounds.getWidth(), bounds.getHeight());
         }
 
         super.draw();
