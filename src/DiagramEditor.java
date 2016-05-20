@@ -222,7 +222,16 @@ public class DiagramEditor {
 
     // ************************* TEXT EVENTS ************************* //
 
+    /**
+     * Sets the top-most selected object's text
+     *
+     * @param text
+     */
     public void selectedObjectTextTyped(String text) {
-        // TODO NEXT add object text
+        DEObjectShape shape = getTopMostShape();
+        if (shape == null) return;
+
+        shape.setLabelText(text);
+        draw();
     }
 }
