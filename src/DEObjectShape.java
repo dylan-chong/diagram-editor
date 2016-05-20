@@ -37,16 +37,23 @@ public abstract class DEObjectShape extends DEObject {
         return getClass().getName() + ": " + getBounds().toString();
     }
 
-    private void drawLabelText() {
-        DEBounds b = getBounds();
-        UI.setColor(labelColor);
-        UI.drawString(labelText,
-                b.getCenter().getX() - (labelText.length() * AVERAGE_CHARACTER_WIDTH / 2),
-                b.getCenter().getY() + (AVERAGE_CHARACTER_HEIGHT / 2));
-    }
 
     public void setLabelText(String text) {
         labelText = text;
+    }
+
+    /**
+     * Draws the labelText in the approximate middle of the
+     * shape.
+     */
+    private void drawLabelText() {
+        DEBounds b = getBounds();
+
+        double x = b.getCenter().getX() - (labelText.length() * AVERAGE_CHARACTER_WIDTH / 2);
+        double y = b.getCenter().getY() + (AVERAGE_CHARACTER_HEIGHT / 2);
+
+        UI.setColor(labelColor);
+        UI.drawString(labelText, x, y);
     }
 
 }
