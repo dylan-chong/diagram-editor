@@ -111,6 +111,21 @@ public class DiagramEditor {
         return null;
     }
 
+    /**
+     * @return The top-most DEObjectShape that can have text altered
+     * (i.e. it cannot be in a group). Returns null if there is no
+     * shape that can be returned.
+     */
+    private DEObjectShape getTopMostShape() {
+        for (DEObject obj : deObjects) {
+            if (obj instanceof DEObjectShape) {
+                return (DEObjectShape) obj;
+            }
+        }
+
+        return null;
+    }
+
     // ************************* MOUSE EVENTS ************************* //
 
     public void doMouse(String action, double x, double y) {
