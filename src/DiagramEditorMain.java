@@ -2,10 +2,23 @@ import ecs100.UI;
 
 /**
  * Created by Dylan on 17/05/16.
- *
+ * <p>
  * Sets up all the UI components
  */
 public class DiagramEditorMain {
+
+    private DiagramEditor diagramEditor;
+
+    private DiagramEditorMain() {
+        diagramEditor = getNewDiagramEditor();
+
+        UI.setMouseMotionListener(this::doMouse);
+        UI.addButton("Instructions", this::displayInstructionsPressed);
+        UI.addButton("Clear All", this::clearAllPressed);
+        UI.addButton("Add Rectangle", this::addRectPressed);
+        UI.addButton("Add Ellipse", this::addEllipsePressed);
+        UI.addButton("Delete Selected", this::deletePressed);
+    }
 
     public static void main(String[] args) {
         if (true) {
@@ -21,8 +34,8 @@ public class DiagramEditorMain {
         UI.setImmediateRepaint(false);
     }
 
-    private DiagramEditorMain() {
-        DiagramEditor diagramEditor = new DiagramEditor(new DiagramEditorOutput() {
+    private DiagramEditor getNewDiagramEditor() {
+        return new DiagramEditor(new DiagramEditorOutput() {
             @Override
             public void showMessage(String msg) {
                 printMessage(msg);
@@ -33,27 +46,46 @@ public class DiagramEditorMain {
                 showMessage("*** DEBUG *** " + msg);
             }
         });
-
-        UI.setMouseMotionListener(diagramEditor::doMouse);
-        UI.addButton("Instructions", this::displayInstructions);
-        UI.addButton("Add Rectangle", diagramEditor::addRectPressed);
-        UI.addButton("Add Ellipse", diagramEditor::addEllipsePressed);
-        UI.addButton("Delete Selected", diagramEditor::deletePressed);
     }
 
     private void printMessage(String msg) {
         UI.printMessage(msg);
     }
 
-    private void displayInstructions() {
+    // ************************* UI EVENTS ************************* //
+
+    private void doMouse(String action, double x, double y) {
+        diagramEditor.doMouse(action, x, y);
+    }
+
+    private void displayInstructionsPressed() {
         UI.println("Welcome to Diagram Editor!\n" +
                 "\n" +
                 "Select and object by clicking on it. Deselect by clicking on the background.\n" +
                 "For some reason, the UIMouseMotionListener doesn't always register a \"clicked\"\n" +
-                "event, so you may have to try clicking twice.\n" +
                 "\n" +
+                "event, so you may have to try clicking twice.\n" +
                 "You can drag around objects and resize them like you can in Microsoft PowerPoint,\n" +
                 "but the objects must be selected.");
         UI.setDivider(0.9);
     }
+
+    private void deletePressed() {
+        diagramEditor.deletePressed();
+    }
+
+    private void clearAllPressed() {
+        diagramEditor = getNewDiagramEditor();
+        UI.clearGraphics();
+        UI.repaintAllGraphics();
+    }
+
+    private void addRectPressed() {
+        diagramEditor.addRectPressed();
+    }
+
+    private void addEllipsePressed() {
+        diagramEditor.addEllipsePressed();
+    }
+
 }
