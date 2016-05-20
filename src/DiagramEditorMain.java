@@ -20,6 +20,7 @@ public class DiagramEditorMain {
         UI.addButton("Add Rectangle", this::addRectPressed);
         UI.addButton("Add Ellipse", this::addEllipsePressed);
         UI.addButton("Add Hexagon", this::addHexagonPressed);
+        UI.addButton("Add Connector", this::addConnectorPressed);
         UI.addButton("Delete Selected", this::deletePressed);
         UI.addTextField("Selected Object Text", this::selectedObjectTextTyped);
     }
@@ -94,6 +95,10 @@ public class DiagramEditorMain {
 
     private void addHexagonPressed() {
         diagramEditor.addHexagonPressed();
+    }
+
+    private void addConnectorPressed() {
+        diagramEditor.addConnectorPressed();
     }
 
     private void selectedObjectTextTyped(String text) {
