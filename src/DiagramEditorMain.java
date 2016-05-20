@@ -1,4 +1,9 @@
 import ecs100.UI;
+import ecs100.UIFileChooser;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Created by Dylan on 17/05/16.
@@ -16,6 +21,8 @@ public class DiagramEditorMain {
 
         UI.setMouseMotionListener(this::doMouse);
         UI.addButton("Instructions", this::displayInstructionsPressed);
+        UI.addButton("Save", this::savePressed);
+        UI.addButton("Load", this::loadPressed);
         UI.addButton("Clear All", this::clearAllPressed);
         UI.addButton("Add Rectangle", this::addRectPressed);
         UI.addButton("Add Ellipse", this::addEllipsePressed);
@@ -74,6 +81,48 @@ public class DiagramEditorMain {
                 "You can drag around objects and resize them like you can in Microsoft PowerPoint,\n" +
                 "but the objects must be selected.");
         UI.setDivider(0.9);
+    }
+
+    private void savePressed() {
+        String path = UIFileChooser.save("Choose where to save the diagram");
+        if (path == null) {
+            printMessage("Save cancelled");
+            return;
+        }
+
+        File file = new File(path);
+        try {
+            DEFileManager.saveDiagram(diagramEditor, file);
+            printMessage("Saved diagram");
+            return;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        printMessage("Error: Could not save");
+    }
+
+    private void loadPressed() {
+        String path = UIFileChooser.open("Open a diagram");
+        if (path == null) {
+            printMessage("Load cancelled");
+            return;
+        }
+
+        File file = new File(path);
+        DiagramEditor de = null;
+        try {
+            de = DEFileManager.loadDiagramEditor(file);
+            diagramEditor = de;
+            diagramEditor.draw();
+            printMessage("Loaded diagram");
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
+            printMessage("Error loading diagram");
+        }
+
+        // TODO TEST loading wrong and right files
     }
 
     private void clearAllPressed() {
