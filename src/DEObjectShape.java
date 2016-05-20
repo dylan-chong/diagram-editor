@@ -11,11 +11,14 @@ public abstract class DEObjectShape extends DEObject {
 
     public static final Color DEFAULT_FILL_COLOR = null;
     public static final Color DEFAULT_EDGE_COLOR = Color.BLACK;
-    public static final double TEXT_DISTANCE_FROM_LEFT = 3.0;
-    public static final double TEXT_DISTANCE_FROM_TOP = TEXT_DISTANCE_FROM_LEFT;
+    public static final Color DEFAULT_LABEL_COLOR = Color.BLACK;
+    public static final double AVERAGE_CHARACTER_HEIGHT = 10;
+    public static final double AVERAGE_CHARACTER_WIDTH = 6.5;
+
 
     protected Color fillColor = DEFAULT_FILL_COLOR;
     protected Color edgeColor = DEFAULT_EDGE_COLOR;
+    protected Color labelColor = DEFAULT_LABEL_COLOR;
 
     private String labelText;
 
@@ -36,8 +39,10 @@ public abstract class DEObjectShape extends DEObject {
 
     private void drawLabelText() {
         DEBounds b = getBounds();
-        UI.drawString(labelText, b.getLeft() + TEXT_DISTANCE_FROM_LEFT,
-                b.getTop() + TEXT_DISTANCE_FROM_TOP);
+        UI.setColor(labelColor);
+        UI.drawString(labelText,
+                b.getCenter().getX() - (labelText.length() * AVERAGE_CHARACTER_WIDTH / 2),
+                b.getCenter().getY() + (AVERAGE_CHARACTER_HEIGHT / 2));
     }
 
     public void setLabelText(String text) {
