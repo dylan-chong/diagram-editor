@@ -3,7 +3,9 @@ import ecs100.UI;
 /**
  * Created by Dylan on 17/05/16.
  * <p>
- * Sets up all the UI components
+ * Sets up all the UI components, and deals
+ * with all the UI events, relaying them
+ * to the diagramEditor instance.
  */
 public class DiagramEditorMain {
 
