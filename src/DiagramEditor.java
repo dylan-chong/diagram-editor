@@ -45,6 +45,8 @@ public class DiagramEditor {
         draw();
     }
 
+    // ------------------------- Deleting Objects ------------------------- //
+
     /**
      * @return Returns true if it could delete any shapes, false
      * if there are no shapes to delete
@@ -53,11 +55,25 @@ public class DiagramEditor {
         ArrayList<DEObject> selected = getSelectedObjects();
         if (selected.size() == 0) return false;
 
-        deObjects.removeAll(selected);
+        deleteObjects(selected);
 
         draw();
         return true;
     }
+
+    private void deleteObjects(ArrayList<DEObject> objects) {
+        for (DEObject obj : objects) {
+            deleteObject(obj);
+        }
+    }
+
+    private void deleteObject(DEObject object) {
+        assert deObjects.contains(object) : "Can't delete object that isn't part of the array";
+        deObjects.remove(object);
+        // TODO LATER remove connectors
+    }
+
+    // ------------------------- Selection ------------------------- //
 
     private void deselectAllSelectedObjects() {
         ArrayList<DEObject> selected = getSelectedObjects();
