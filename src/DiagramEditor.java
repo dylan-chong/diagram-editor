@@ -61,7 +61,7 @@ public class DiagramEditor {
         draw();
     }
 
-    // ------------------------- Deleting Objects ------------------------- //
+    // ------------------------- Deleting Objects and Connectors ------------------------- //
 
     /**
      * @return Returns true if it could delete any shapes, false
@@ -85,15 +85,19 @@ public class DiagramEditor {
 
     private void deleteObject(DEObject object) {
         assert deObjects.contains(object) : "Can't delete object that isn't part of the array";
-
-        for (DEConnector connector : deConnectors) {
-
-        }
-
+        deleteConnectorsConnectedToObject(object);
         deObjects.remove(object);
     }
 
-    // TODO remove connectors from shape(s)
+    private void deleteConnectorsConnectedToObject(DEObject object) {
+        for (int c = 0; c < deConnectors.size(); c++) {
+            DEConnector connector = deConnectors.get(c);
+            if (connector.isConnectedToObject(object)) {
+                deConnectors.remove(c);
+                c--;
+            }
+        }
+    }
 
     // ------------------------- Selection ------------------------- //
 
