@@ -204,4 +204,11 @@ public class DiagramEditor {
             output.showMessage("Couldn't delete shapes");
         }
     }
+
+    // ************************* TEXT EVENTS ************************* //
+
+    public void selectedObjectTextTyped(String text) {
+        System.out.println(text);
+        // TODO NEXT add object text
+    }
 }

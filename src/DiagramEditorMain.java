@@ -21,6 +21,7 @@ public class DiagramEditorMain {
         UI.addButton("Add Ellipse", this::addEllipsePressed);
         UI.addButton("Add Hexagon", this::addHexagonPressed);
         UI.addButton("Delete Selected", this::deletePressed);
+        UI.addTextField("Selected Object Text", this::selectedObjectTextTyped);
     }
 
     public static void main(String[] args) {
@@ -95,6 +96,7 @@ public class DiagramEditorMain {
         diagramEditor.addHexagonPressed();
     }
 
+    private void selectedObjectTextTyped(String text) {
+        diagramEditor.selectedObjectTextTyped(text);
+    }
 }
-
-// TODO AFTER add text UI and funnctionality object
