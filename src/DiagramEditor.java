@@ -127,19 +127,15 @@ public class DiagramEditor {
         return null;
     }
 
-    /**
-     * @return The top-most DEObjectShape that can have text altered
-     * (i.e. it cannot be in a group). Returns null if there is no
-     * shape that can be returned.
-     */
-    private DEObjectShape getTopMostShape() {
+    private ArrayList<DEObjectShape> getSelectedShapes() {
+        ArrayList<DEObjectShape> selectedShapes = new ArrayList<>();
         for (DEObject obj : deObjects) {
-            if (obj instanceof DEObjectShape) {
-                return (DEObjectShape) obj;
+            if (obj instanceof DEObjectShape && obj.isSelected()) {
+                selectedShapes.add((DEObjectShape) obj);
             }
         }
 
-        return null;
+        return selectedShapes;
     }
 
     // ************************* MOUSE EVENTS ************************* //
@@ -244,8 +240,10 @@ public class DiagramEditor {
      * @param text
      */
     public void selectedObjectTextTyped(String text) {
-        DEObjectShape shape = getTopMostShape();
-        if (shape == null) return;
+        ArrayList<DEObjectShape> selectedShapes = getSelectedShapes();
+        if (selectedShapes.size() == 0) return;
+
+        DEObjectShape shape = selectedShapes.get(0);
 
         shape.setLabelText(text);
         draw();
