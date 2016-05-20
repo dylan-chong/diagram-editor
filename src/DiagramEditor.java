@@ -15,11 +15,19 @@ public class DiagramEditor {
      * the closest to the user).
      */
     private ArrayList<DEObject> deObjects = new ArrayList<>();
+    private ArrayList<DEConnector> connectors = new ArrayList<>();
     private DiagramEditorOutput output;
 
     private DEPoint mouseDownPoint;
     private DEDraggable objectBeingDragged;
     private boolean hasCheckedForObjectBeingDragged;
+
+    /**
+     * This is null unless the user has clicked "Add Connector".
+     * Then it will be set to the currently selected object, and
+     * after the user selects another object, they can be connected.
+     */
+    private DEObject firstObjectToConnect;
 
     public DiagramEditor(DiagramEditorOutput output) {
         draw();
@@ -231,6 +239,26 @@ public class DiagramEditor {
         } else {
             output.showMessage("Couldn't delete shapes");
         }
+    }
+
+    public void addConnectorPressed() {
+        if (firstObjectToConnect != null) {
+            output.showMessage("You are already trying to connect two objects.\n"
+                    + "Please select another object to connect.");
+            return;
+        }
+
+        ArrayList<DEObject> selected = getSelectedObjects();
+        if (selected.size() == 0) {
+            output.showMessage("Please select an object first");
+            return;
+        } else if (selected.size() > 1) {
+            output.showMessage("Please select only one object");
+            return;
+        }
+
+        firstObjectToConnect = selected.get(0);
+        output.showMessage("Select another object to connect to");
     }
 
     // ************************* TEXT EVENTS ************************* //
