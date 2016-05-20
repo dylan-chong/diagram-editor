@@ -40,7 +40,10 @@ public class DiagramEditor {
 
     private void draw() {
         UI.clearGraphics();
+
         deObjects.forEach(DEObject::draw);
+        connectors.forEach(DEConnector::draw);
+
         UI.repaintAllGraphics();
     }
 
@@ -50,6 +53,11 @@ public class DiagramEditor {
         obj.setSelected(true);
         deObjects.add(0, obj);
 
+        draw();
+    }
+
+    private void addNewConnector(DEConnector connector) {
+        connectors.add(connector);
         draw();
     }
 
@@ -213,11 +221,14 @@ public class DiagramEditor {
 
         if (firstObjectToConnect != null) {
             if (didSelect) {
-                DEConnector connector = new DEConnector(firstObjectToConnect, getSelectedObjects().get(0));
+                DEConnector connector = new DEConnector(firstObjectToConnect,
+                        getSelectedObjects().get(0));
+                addNewConnector(connector);
             } else {
-                firstObjectToConnect = null;
                 output.showMessage("Cancelled connection");
             }
+
+            firstObjectToConnect = null;
         }
 
         if (!didSelect) {
