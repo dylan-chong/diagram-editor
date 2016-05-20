@@ -1,6 +1,7 @@
 import ecs100.UI;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by Dylan on 17/05/16.
@@ -9,7 +10,7 @@ import java.awt.*;
  * shape is selected, so that you can drag it to
  * resize the shape
  */
-public class DENode implements DEDraggable {
+public class DENode implements DEDraggable, Serializable {
 
     public static final Color COLOR = Color.GRAY;
     public static final double WIDTH = 10;
