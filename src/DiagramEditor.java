@@ -167,6 +167,7 @@ public class DiagramEditor {
     private void mouseDragged(DEPoint mousePoint) {
         if (objectBeingDragged == null) {
             if (hasCheckedForObjectBeingDragged) return;
+
             // may set it to null
             objectBeingDragged =
                     getDraggableDraggableAtPoint(mouseDownPoint);
