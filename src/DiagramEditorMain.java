@@ -19,6 +19,7 @@ public class DiagramEditorMain {
         UI.addButton("Clear All", this::clearAllPressed);
         UI.addButton("Add Rectangle", this::addRectPressed);
         UI.addButton("Add Ellipse", this::addEllipsePressed);
+        UI.addButton("Add Hexagon", this::addHexagonPressed);
         UI.addButton("Delete Selected", this::deletePressed);
     }
 
@@ -88,6 +89,10 @@ public class DiagramEditorMain {
 
     private void addEllipsePressed() {
         diagramEditor.addEllipsePressed();
+    }
+
+    private void addHexagonPressed() {
+        diagramEditor.addHexagonPressed();
     }
 
 }

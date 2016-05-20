@@ -26,6 +26,10 @@ public class DiagramEditor {
         this.output = output;
     }
 
+    public static DEBounds getRandomNewShapeBounds() {
+        return new DEBounds(50 + 100 * Math.random(), 50 + 100 * Math.random(), 200, 200);
+    }
+
     private void draw() {
         UI.clearGraphics();
         deObjects.forEach(DEObject::draw);
@@ -180,16 +184,17 @@ public class DiagramEditor {
 
     public void addRectPressed() {
         deselectAllSelectedObjects();
-        addNewShape(new DEObjectShapeRect(
-                new DEBounds(50 + 100 * Math.random(), 50 + 100 * Math.random(), 200, 250))
-        );
+        addNewShape(new DEObjectShapeRect(getRandomNewShapeBounds()));
     }
 
     public void addEllipsePressed() {
         deselectAllSelectedObjects();
-        addNewShape(new DEObjectShapeEllipse(
-                new DEBounds(50 + 100 * Math.random(), 50 + 100 * Math.random(), 200, 180))
-        );
+        addNewShape(new DEObjectShapeEllipse(getRandomNewShapeBounds()));
+    }
+
+    public void addHexagonPressed() {
+        deselectAllSelectedObjects();
+        addNewShape(new DEObjectShapeHexagon(getRandomNewShapeBounds()));
     }
 
     public void deletePressed() {
