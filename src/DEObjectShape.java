@@ -10,7 +10,6 @@ public abstract class DEObjectShape extends DEObject {
     public static final Color DEFAULT_FILL_COLOR = null;
     public static final Color DEFAULT_EDGE_COLOR = Color.BLACK;
 
-
     protected Color fillColor = DEFAULT_FILL_COLOR;
     protected Color edgeColor = DEFAULT_EDGE_COLOR;
 
@@ -19,7 +18,7 @@ public abstract class DEObjectShape extends DEObject {
     }
 
     public String toString() {
-        return getClass().getName() + ": " + bounds.toString();
+        return getClass().getName() + ": " + getBounds().toString();
     }
 
 }

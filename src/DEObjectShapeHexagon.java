@@ -52,8 +52,8 @@ public class DEObjectShapeHexagon extends DEObjectShape {
     public void draw() {
         assert fillColor != null || edgeColor != null : "Fill and edge color can't both be transparent";
 
-        if (fillColor != null) drawHexagon(bounds, fillColor, true);
-        if (edgeColor != null) drawHexagon(bounds, edgeColor, false);
+        if (fillColor != null) drawHexagon(getBounds(), fillColor, true);
+        if (edgeColor != null) drawHexagon(getBounds(), edgeColor, false);
 
         super.draw();
     }

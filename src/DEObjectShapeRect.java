@@ -12,13 +12,16 @@ public class DEObjectShapeRect extends DEObjectShape {
     @Override
     public void draw() {
         assert fillColor != null || edgeColor != null : "Fill and edge color can't both be transparent";
+
+        DEBounds b = getBounds();
+
         if (fillColor != null) {
             UI.setColor(fillColor);
-            UI.fillRect(bounds.getLeft(), bounds.getTop(), bounds.getWidth(), bounds.getHeight());
+            UI.fillRect(b.getLeft(), b.getTop(), b.getWidth(), b.getHeight());
         }
         if (edgeColor != null) {
             UI.setColor(edgeColor);
-            UI.drawRect(bounds.getLeft(), bounds.getTop(), bounds.getHeight(), bounds.getHeight());
+            UI.drawRect(b.getLeft(), b.getTop(), b.getHeight(), b.getHeight());
         }
 
         super.draw();

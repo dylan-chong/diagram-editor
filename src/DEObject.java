@@ -6,10 +6,9 @@
  */
 public abstract class DEObject implements DEDraggable {
 
-    protected DEBounds bounds;
+    private DEBounds bounds;
     private DEObjectNodeCollection nodeCollection;
     private boolean isSelected;
-
     /**
      * When the object has just started being dragged,
      * a mousePoint is passed to this.pickUp. The
@@ -25,17 +24,21 @@ public abstract class DEObject implements DEDraggable {
                 newBounds -> setBounds(newBounds));
     }
 
+    protected DEBounds getBounds() {
+        return bounds;
+    }
+
+    private void setBounds(DEBounds bounds) {
+        this.bounds = bounds;
+        nodeCollection.setObjectBounds(bounds);
+    }
+
     public boolean isSelected() {
         return isSelected;
     }
 
     public void setSelected(boolean selected) {
         isSelected = selected;
-    }
-
-    private void setBounds(DEBounds bounds) {
-        this.bounds = bounds;
-        nodeCollection.setObjectBounds(bounds);
     }
 
     public void draw() {
@@ -86,6 +89,7 @@ public abstract class DEObject implements DEDraggable {
         followOrPutDownAtMousePoint(mousePoint);
     }
 
+    @Override
     public void putDown(DEPoint mousePoint) {
         followOrPutDownAtMousePoint(mousePoint);
         boundsCalculator = null;

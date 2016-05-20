@@ -208,7 +208,6 @@ public class DiagramEditor {
     // ************************* TEXT EVENTS ************************* //
 
     public void selectedObjectTextTyped(String text) {
-        System.out.println(text);
         // TODO NEXT add object text
     }
 }
