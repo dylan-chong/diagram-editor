@@ -86,7 +86,9 @@ public class DEBounds {
         return new DEPoint(getLeft() + (getWidth() / 2), getBottom());
     }
 
-    public DEPoint getCenter() { return new DEPoint(getLeft() + getWidth() / 2, getTop() + getHeight() / 2);}
+    public DEPoint getCenter() {
+        return new DEPoint(getLeft() + getWidth() / 2, getTop() + getHeight() / 2);
+    }
 
     public double getWidth() {
         return bottomRight.getX() - topLeft.getX();

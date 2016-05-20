@@ -1,7 +1,6 @@
-
 /**
  * Created by Dylan on 17/05/16.
- *
+ * <p>
  * Manual testing is faster than unit
  * testing, since you can use breakpoints
  */

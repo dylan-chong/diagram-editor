@@ -19,7 +19,7 @@ public interface DEDraggable {
      * a node). Some Draggables may not want to be
      * dragged sometimes - such as objects that
      * haven't beeng selected yet.
-     *
+     * <p>
      * Returns null if there is no Draggable at the given
      * point.
      */

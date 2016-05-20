@@ -96,7 +96,7 @@ public class DiagramEditor {
      * @param mousePoint
      * @return
      */
-    public DEDraggable getDraggableDraggableAtPoint(DEPoint mousePoint) { // TODO AFTER remove boolean parameter
+    public DEDraggable getDraggableDraggableAtPoint(DEPoint mousePoint) {
         for (DEObject obj : deObjects) {
             DEDraggable draggable = obj.getDraggableDraggableAtPoint(mousePoint);
             if (draggable == null) continue;

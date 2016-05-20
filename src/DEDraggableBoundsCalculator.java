@@ -17,6 +17,7 @@ public class DEDraggableBoundsCalculator {
     /**
      * Gets new bounds for the object being dragged (assumes size doesn't
      * change)
+     *
      * @param mousePoint
      * @return
      */
