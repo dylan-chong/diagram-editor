@@ -17,6 +17,13 @@ public abstract class DEObjectShape extends DEObject {
         super(bounds);
     }
 
+    @Override
+    public void draw() {
+        super.draw();
+        // TODO draw text
+    }
+
+    @Override
     public String toString() {
         return getClass().getName() + ": " + getBounds().toString();
     }
