@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * Created by Dylan on 17/05/16.
  * <p>
  * Rectangular bounds on the screen
  */
-public class DEBounds {
+public class DEBounds implements Serializable {
 
     private DEPoint topLeft, bottomRight;
 

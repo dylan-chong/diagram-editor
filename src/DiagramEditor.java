@@ -1,5 +1,6 @@
 import ecs100.UI;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * <p>
  * The controller for the app
  */
-public class DiagramEditor {
+public class DiagramEditor implements Serializable {
 
     /**
      * Contains DEGroup and DEObjectShape objects. They

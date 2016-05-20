@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * Created by Dylan on 17/05/16.
  * <p>
  * A Point on the screen
  */
-public class DEPoint {
+public class DEPoint implements Serializable {
 
     private double x, y;
 

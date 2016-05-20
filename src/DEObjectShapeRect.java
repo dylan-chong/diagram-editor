@@ -1,9 +1,11 @@
 import ecs100.UI;
 
+import java.io.Serializable;
+
 /**
  * Created by Dylan on 17/05/16.
  */
-public class DEObjectShapeRect extends DEObjectShape {
+public class DEObjectShapeRect extends DEObjectShape implements Serializable {
 
     public DEObjectShapeRect(DEBounds bounds) {
         super(bounds);

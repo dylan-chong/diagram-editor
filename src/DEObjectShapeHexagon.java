@@ -1,11 +1,12 @@
 import ecs100.UI;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by Dylan on 17/05/16.
  */
-public class DEObjectShapeHexagon extends DEObjectShape {
+public class DEObjectShapeHexagon extends DEObjectShape implements Serializable {
 
     public DEObjectShapeHexagon(DEBounds bounds) {
         super(bounds);

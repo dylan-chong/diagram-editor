@@ -1,9 +1,11 @@
 import ecs100.UI;
 
+import java.io.Serializable;
+
 /**
  * Created by Dylan on 17/05/16.
  */
-public class DEObjectShapeEllipse extends DEObjectShape {
+public class DEObjectShapeEllipse extends DEObjectShape implements Serializable {
 
     public DEObjectShapeEllipse(DEBounds bounds) {
         super(bounds);

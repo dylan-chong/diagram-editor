@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * Created by Dylan on 19/05/16.
  * <p>
  * Calculates the new bounds that an object when, and after,
  * it is dragged.
  */
-public class DEDraggableBoundsCalculator {
+public class DEDraggableBoundsCalculator implements Serializable {
 
     private DEBounds currentBounds;
     private DEPoint originalMousePoint, pickUpRelativePoint;

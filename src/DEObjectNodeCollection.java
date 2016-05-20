@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Created by Dylan on 20/05/16.
  */
-public class DEObjectNodeCollection {
+public class DEObjectNodeCollection implements Serializable {
 
     private static final int NODE_TOP_LEFT = 0;
     private static final int NODE_TOP_RIGHT = 1;

@@ -1,11 +1,12 @@
 import ecs100.UI;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by Dylan on 20/05/16.
  */
-public class DEConnector {
+public class DEConnector implements Serializable {
 
     public static final Color DEFAULT_COLOR = Color.BLACK;
 
