@@ -15,7 +15,7 @@ public class DiagramEditor {
      * the closest to the user).
      */
     private ArrayList<DEObject> deObjects = new ArrayList<>();
-    private ArrayList<DEConnector> connectors = new ArrayList<>();
+    private ArrayList<DEConnector> deConnectors = new ArrayList<>();
     private DiagramEditorOutput output;
 
     private DEPoint mouseDownPoint;
@@ -42,7 +42,7 @@ public class DiagramEditor {
         UI.clearGraphics();
 
         deObjects.forEach(DEObject::draw);
-        connectors.forEach(DEConnector::draw);
+        deConnectors.forEach(DEConnector::draw);
 
         UI.repaintAllGraphics();
     }
@@ -57,7 +57,7 @@ public class DiagramEditor {
     }
 
     private void addNewConnector(DEConnector connector) {
-        connectors.add(connector);
+        deConnectors.add(connector);
         draw();
     }
 
@@ -85,9 +85,15 @@ public class DiagramEditor {
 
     private void deleteObject(DEObject object) {
         assert deObjects.contains(object) : "Can't delete object that isn't part of the array";
+
+        for (DEConnector connector : deConnectors) {
+
+        }
+
         deObjects.remove(object);
-        // TODO LATER remove connectors
     }
+
+    // TODO remove connectors from shape(s)
 
     // ------------------------- Selection ------------------------- //
 
