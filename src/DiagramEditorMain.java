@@ -22,6 +22,7 @@ public class DiagramEditorMain {
         UI.addButton("Add Hexagon", this::addHexagonPressed);
         UI.addButton("Add Connector", this::addConnectorPressed);
         UI.addButton("Delete Selected", this::deletePressed);
+        UI.addButton("Delete Connectors", this::deleteConnectorsPressed);
         UI.addTextField("Selected Object Text", this::selectedObjectTextTyped);
     }
 
@@ -75,10 +76,6 @@ public class DiagramEditorMain {
         UI.setDivider(0.9);
     }
 
-    private void deletePressed() {
-        diagramEditor.deletePressed();
-    }
-
     private void clearAllPressed() {
         diagramEditor = getNewDiagramEditor();
         UI.clearGraphics();
@@ -99,6 +96,14 @@ public class DiagramEditorMain {
 
     private void addConnectorPressed() {
         diagramEditor.addConnectorPressed();
+    }
+
+    private void deletePressed() {
+        diagramEditor.deletePressed();
+    }
+
+    private void deleteConnectorsPressed() {
+        diagramEditor.deleteConnectorsPressed();
     }
 
     private void selectedObjectTextTyped(String text) {

@@ -89,14 +89,18 @@ public class DiagramEditor {
         deObjects.remove(object);
     }
 
-    private void deleteConnectorsConnectedToObject(DEObject object) {
+    private boolean deleteConnectorsConnectedToObject(DEObject object) {
+        boolean connectorsWereDeleted = false;
         for (int c = 0; c < deConnectors.size(); c++) {
             DEConnector connector = deConnectors.get(c);
             if (connector.isConnectedToObject(object)) {
+                connectorsWereDeleted = true;
                 deConnectors.remove(c);
                 c--;
             }
         }
+        if (connectorsWereDeleted) draw();
+        return connectorsWereDeleted;
     }
 
     // ------------------------- Selection ------------------------- //
@@ -269,7 +273,25 @@ public class DiagramEditor {
         if (deleteAllSelectedObjects()) {
             output.showMessage("Deleted shapes");
         } else {
-            output.showMessage("Couldn't delete shapes");
+            output.showMessage("Couldn't delete any shapes");
+        }
+    }
+
+    public void deleteConnectorsPressed() {
+        ArrayList<DEObject> selectedObjects = getSelectedObjects();
+        if (selectedObjects.size() == 0) {
+            output.showMessage("No objects are selected");
+            return;
+        }
+        boolean connectorsWereDeleted = false;
+        for (DEObject obj : selectedObjects) {
+            if (deleteConnectorsConnectedToObject(obj))
+                connectorsWereDeleted = true;
+        }
+        if (connectorsWereDeleted) {
+            output.showMessage("Connectors were deleted");
+        } else {
+            output.showMessage("No connectors were deleted");
         }
     }
 
