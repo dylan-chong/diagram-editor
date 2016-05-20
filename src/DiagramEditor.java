@@ -209,7 +209,18 @@ public class DiagramEditor {
      * @param mousePoint
      */
     private void mouseClicked(DEPoint mousePoint) {
-        if (!attemptSelectAtPoint(mousePoint)) {
+        boolean didSelect = attemptSelectAtPoint(mousePoint);
+
+        if (firstObjectToConnect != null) {
+            if (didSelect) {
+                DEConnector connector = new DEConnector(firstObjectToConnect, getSelectedObjects().get(0));
+            } else {
+                firstObjectToConnect = null;
+                output.showMessage("Cancelled connection");
+            }
+        }
+
+        if (!didSelect) {
             deselectAllSelectedObjects();
         }
         mouseDownPoint = null;

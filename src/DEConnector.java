@@ -12,6 +12,11 @@ public class DEConnector {
     private DEObject connectedObjectA;
     private DEObject connectedObjectB;
 
+    public DEConnector(DEObject connectedObjectA, DEObject connectedObjectB) {
+        this.connectedObjectA = connectedObjectA;
+        this.connectedObjectB = connectedObjectB;
+    }
+
     public void draw() {
         // TODO: 20/05/16
     }
