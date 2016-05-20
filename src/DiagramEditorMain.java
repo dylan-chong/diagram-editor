@@ -91,3 +91,5 @@ public class DiagramEditorMain {
     }
 
 }
+
+// TODO AFTER add text UI and funnctionality object
