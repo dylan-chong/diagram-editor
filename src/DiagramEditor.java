@@ -39,7 +39,7 @@ public class DiagramEditor implements Serializable {
         return new DEBounds(50 + 100 * Math.random(), 50 + 100 * Math.random(), 200, 200);
     }
 
-    private void draw() {
+    public void draw() {
         UI.clearGraphics();
 
         deObjects.forEach(DEObject::draw);
