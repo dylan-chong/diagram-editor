@@ -470,7 +470,7 @@ public class DiagramEditor implements Serializable {
     public void groupSelectedPressed() {
         ArrayList<DEObject> selected = getSelectedObjects();
         if (selected.size() < 2) {
-            output.showMessage("You need at least 2 objects for grouping");
+            output.showMessage("You need at least 2 selected objects for grouping");
             return;
         }
 
