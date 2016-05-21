@@ -13,13 +13,22 @@ public class DEGroup extends DEObject implements Serializable {
         super(calculateBounds(deObjects));
         this.deObjects = deObjects;
         this.deConnectors = deConnectors;
+
+
     }
 
     // TODO AFTER prevent resizing of group
-    // TODO AFTER get draggable draggable override
+
+    @Override
+    public void draw() {
+        super.draw();
+        deObjects.forEach(DEObject::draw);
+        deConnectors.forEach(DEConnector::draw);
+    }
 
     /**
      * Calculates the bounds that is taken up by the objects
+     *
      * @param objects
      * @return
      */
@@ -44,9 +53,25 @@ public class DEGroup extends DEObject implements Serializable {
     }
 
     @Override
-    public void draw() {
-        super.draw();
-        deObjects.forEach(DEObject::draw);
-        deConnectors.forEach(DEConnector::draw);
+    protected void followOrPutDownAtMousePoint(DEPoint mousePoint) {
+        super.followOrPutDownAtMousePoint(mousePoint);
+
+        ArrayList<DEBounds> newObjectBounds = getBoundsCalculator()
+                .getNewObjectsBoundsForMousePoint(mousePoint);
+
+        for (int o = 0; o < deObjects.size(); o++) {
+            DEObject obj = deObjects.get(o);
+            obj.setBounds(newObjectBounds.get(o));
+        }
     }
+
+    @Override
+    protected DEDraggableBoundsCalculator getNewBoundsCalculator(DEPoint mousePoint) {
+        ArrayList<DEBounds> objectBounds = new ArrayList<>();
+        for (DEObject obj : deObjects) {
+            objectBounds.add(obj.getBounds());
+        }
+        return new DEDraggableBoundsCalculator(mousePoint, getBounds(), objectBounds);
+    }
+
 }

@@ -19,11 +19,15 @@ public abstract class DEObject implements DEDraggable, Serializable {
                 newBounds -> setBounds(newBounds));
     }
 
+    public DEDraggableBoundsCalculator getBoundsCalculator() {
+        return boundsCalculator;
+    }
+
     protected DEBounds getBounds() {
         return bounds;
     }
 
-    private void setBounds(DEBounds bounds) {
+    protected void setBounds(DEBounds bounds) {
         this.bounds = bounds;
         nodeCollection.setObjectBounds(bounds);
     }
@@ -73,10 +77,11 @@ public abstract class DEObject implements DEDraggable, Serializable {
         return null;
     }
 
+    @Override
     public void pickUp(DEPoint mousePoint) {
         assert isSelected : "Cannot pick up DEObject unless selected";
         assert pointIsWithinBounds(mousePoint) : "Can't pick up from a location not in bounds";
-        boundsCalculator = new DEDraggableBoundsCalculator(mousePoint, bounds);
+        boundsCalculator = getNewBoundsCalculator(mousePoint);
     }
 
     @Override
@@ -90,7 +95,11 @@ public abstract class DEObject implements DEDraggable, Serializable {
         boundsCalculator = null;
     }
 
-    private void followOrPutDownAtMousePoint(DEPoint mousePoint) {
+    protected DEDraggableBoundsCalculator getNewBoundsCalculator(DEPoint mousePoint) {
+        return new DEDraggableBoundsCalculator(mousePoint, bounds);
+    }
+
+    protected void followOrPutDownAtMousePoint(DEPoint mousePoint) {
         setBounds(boundsCalculator.getNewBoundsForMousePoint(mousePoint));
     }
 
