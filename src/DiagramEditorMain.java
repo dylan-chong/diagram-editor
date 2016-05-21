@@ -82,10 +82,13 @@ public class DiagramEditorMain implements Serializable {
                 "\n" +
                 "Select and object by clicking on it. Deselect by clicking on the background.\n" +
                 "For some reason, the UIMouseMotionListener doesn't always register a \"clicked\"\n" +
-                "\n" +
                 "event, so you may have to try clicking twice.\n" +
+                "\n" +
                 "You can drag around objects and resize them like you can in Microsoft PowerPoint,\n" +
-                "but the objects must be selected.");
+                "but the objects must be selected.\n" +
+                "\n" +
+                "Information relating to user interaction will sometimes appear in the bottom left\n" +
+                "of the screen.");
         UI.setDivider(0.9);
     }
 
