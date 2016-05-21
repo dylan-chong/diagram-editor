@@ -55,9 +55,14 @@ public class DiagramEditor implements Serializable {
 
     // ************************* OBJECTS AND SELECTION ************************* //
 
+    private void addObject(DEObject object) {
+        assert object != null : "The object cannot be null";
+        deObjects.add(0, object);
+    }
+
     private void addNewShape(DEObject obj) {
         obj.setSelected(true);
-        deObjects.add(0, obj);
+        addObject(obj);
 
         draw();
     }
@@ -211,6 +216,28 @@ public class DiagramEditor implements Serializable {
         }
 
         return selectedShapes;
+    }
+
+    // ------------------------- Grouping ------------------------- //
+
+    /**
+     * Removes the connectors and objects that will be grouped, and puts them
+     * into a new group
+     * @param objects
+     */
+    private void groupObjects(ArrayList<DEObject> objects) {
+        ArrayList<DEConnector> connectors = new ArrayList<>();
+
+        for (DEObject obj : objects) {
+            ArrayList<DEConnector> objConnectors = getConnectorsConnectedToObject(obj);
+            connectors.addAll(objConnectors);
+            deleteConnectors(objConnectors);
+        }
+
+        deleteObjects(objects);
+
+        DEGroup group = new DEGroup(objects, connectors);
+        addObject(group);
     }
 
     // ************************* MOUSE EVENTS ************************* //
@@ -401,7 +428,7 @@ public class DiagramEditor implements Serializable {
             return;
         }
 
-        groupSelected(selected);
+        groupObjects(selected);
         output.showMessage("Selection was grouped");
     }
 
