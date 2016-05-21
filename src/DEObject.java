@@ -112,9 +112,7 @@ public abstract class DEObject implements DEDraggable, Serializable {
     }
 
     public boolean canSelectAtPoint(DEPoint point) {
-        if (isSelected()) return false;
-        if (bounds.pointIsWithinBounds(point)) return true;
-        return false;
+        return bounds.pointIsWithinBounds(point);
     }
 
 }

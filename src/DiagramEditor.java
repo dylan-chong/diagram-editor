@@ -22,6 +22,7 @@ public class DiagramEditor implements Serializable {
     private DEPoint mouseDownPoint;
     private DEDraggable objectBeingDragged;
     private boolean hasCheckedForObjectBeingDragged;
+    private boolean shouldSelectNextClicked = false;
 
     /**
      * This is null unless the user has clicked "Add Connector".
@@ -131,8 +132,6 @@ public class DiagramEditor implements Serializable {
      * @return True if an object could be selected
      */
     private boolean attemptSelectAtPoint(DEPoint mousePoint) {
-        deselectAllSelectedObjects();
-
         for (DEObject obj : deObjects) {
             if (obj.canSelectAtPoint(mousePoint)) {
                 obj.setSelected(true);
@@ -232,12 +231,16 @@ public class DiagramEditor implements Serializable {
 
     /**
      * Mouse pressed and then released without drag
-     *
      * @param mousePoint
      */
     private void mouseClicked(DEPoint mousePoint) {
+        if (!shouldSelectNextClicked) deselectAllSelectedObjects();
         boolean didSelect = attemptSelectAtPoint(mousePoint);
 
+        // Disable shouldSelectNextClicked only if an object was selected
+        if (didSelect && shouldSelectNextClicked) shouldSelectNextClicked = false;
+
+        // Should connect next clicked object
         if (firstObjectToConnect != null) {
             if (didSelect) {
                 DEConnector connector = new DEConnector(firstObjectToConnect,
@@ -250,6 +253,7 @@ public class DiagramEditor implements Serializable {
             firstObjectToConnect = null;
         }
 
+        // Deselect all if the background was clicked
         if (!didSelect) {
             deselectAllSelectedObjects();
         }
@@ -272,6 +276,11 @@ public class DiagramEditor implements Serializable {
     public void addHexagonPressed() {
         deselectAllSelectedObjects();
         addNewShape(new DEObjectShapeHexagon(getRandomNewShapeBounds()));
+    }
+
+    public void selectAnotherPressed() {
+        output.showMessage("Select another shape");
+        shouldSelectNextClicked = true;
     }
 
     public void deletePressed() {

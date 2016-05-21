@@ -28,6 +28,7 @@ public class DiagramEditorMain implements Serializable {
         UI.addButton("Add Ellipse", this::addEllipsePressed);
         UI.addButton("Add Hexagon", this::addHexagonPressed);
         UI.addButton("Add Connector", this::addConnectorPressed);
+        UI.addButton("Select another", this::selectAnotherPressed);
         UI.addButton("Delete Selected", this::deletePressed);
         UI.addButton("Delete Connectors", this::deleteConnectorsPressed);
         UI.addTextField("Selected Object Text", this::selectedObjectTextTyped);
@@ -107,6 +108,10 @@ public class DiagramEditorMain implements Serializable {
 
     private void addConnectorPressed() {
         diagramEditor.addConnectorPressed();
+    }
+
+    private void selectAnotherPressed() {
+        diagramEditor.selectAnotherPressed();
     }
 
     private void deletePressed() {
