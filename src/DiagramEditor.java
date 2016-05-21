@@ -238,7 +238,10 @@ public class DiagramEditor implements Serializable {
 
         deleteObjects(objects);
 
+        // If there are DEGroups inside objects, then it will be ungrouped
+        // and then regrouped into one layer of group
         DEGroup group = new DEGroup(objects, connectors);
+
         addObject(group);
         group.setSelected(true);
         draw();

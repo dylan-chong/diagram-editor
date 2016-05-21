@@ -39,7 +39,7 @@ public class DEGroup extends DEObject implements Serializable {
 
         return new DEBounds(mostLeft, mostTop, width, height);
     }
-    
+
     public ArrayList<DEObject> getDeObjects() {
         return new ArrayList<>(this.deObjects);
     }
