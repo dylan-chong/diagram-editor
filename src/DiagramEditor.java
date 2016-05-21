@@ -110,6 +110,12 @@ public class DiagramEditor implements Serializable {
         deConnectors.remove(connector);
     }
 
+    private void deleteConnectors(ArrayList<DEConnector> connectors) {
+        for (DEConnector c : connectors) {
+            deleteConnector(c);
+        }
+    }
+
     private boolean deleteConnectorsConnectedToObject(DEObject object) {
         ArrayList<DEConnector> toDelete = getConnectorsConnectedToObject(object);
         
