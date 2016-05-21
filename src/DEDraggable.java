@@ -18,9 +18,8 @@ public interface DEDraggable {
      * draggable that is part of this object (e.g.
      * a node). Some Draggables may not want to be
      * dragged sometimes - such as objects that
-     * haven't beeng selected yet.
-     * <p>
-     * Returns null if there is no Draggable at the given
+     * haven't been selected yet - so it may return
+     * null even if there is a Draggable at the given
      * point.
      */
     DEDraggable getDraggableDraggableAtPoint(DEPoint point);
