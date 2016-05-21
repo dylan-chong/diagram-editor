@@ -15,6 +15,9 @@ public class DEGroup extends DEObject implements Serializable {
         this.deConnectors = deConnectors;
     }
 
+    // TODO AFTER prevent resizing of group
+    // TODO AFTER get draggable draggable override
+
     /**
      * Calculates the bounds that is taken up by the objects
      * @param objects
@@ -25,8 +28,19 @@ public class DEGroup extends DEObject implements Serializable {
         double mostBottom = -999999;
         double mostLeft = 999999;
         double mostRight = -999999;
-        // TODO: 21/05/16
-        return new DEBounds(mostLeft, mostTop, mostRight - mostLeft, mostBottom - mostTop);
+
+        for (DEObject obj : objects) {
+            DEBounds b = obj.getBounds();
+            if (b.getLeft() < mostLeft) mostLeft = b.getLeft();
+            if (b.getTop() < mostTop) mostTop = b.getTop();
+            if (b.getBottom() > mostBottom) mostBottom = b.getBottom();
+            if (b.getRight() > mostRight) mostRight = b.getRight();
+        }
+
+        double width = mostRight - mostLeft;
+        double height = mostBottom - mostTop;
+
+        return new DEBounds(mostLeft, mostTop, width, height);
     }
 
     @Override
