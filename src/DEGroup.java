@@ -17,6 +17,7 @@ public class DEGroup extends DEObject implements Serializable {
 
     }
 
+    // TODO NEXT ungroup button
     // TODO AFTER prevent resizing of group
 
     @Override
