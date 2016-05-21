@@ -388,6 +388,17 @@ public class DiagramEditor implements Serializable {
         output.showMessage("Select another object to connect to");
     }
 
+    public void groupSelectedPressed() {
+        ArrayList<DEObject> selected = getSelectedObjects();
+        if (selected.size() < 2) {
+            output.showMessage("You need at least 2 objects for grouping");
+            return;
+        }
+
+        groupSelected(selected);
+        output.showMessage("Selection was grouped");
+    }
+
     // ************************* TEXT EVENTS ************************* //
 
     /**

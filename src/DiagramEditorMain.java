@@ -28,7 +28,8 @@ public class DiagramEditorMain implements Serializable {
         UI.addButton("Add Ellipse", this::addEllipsePressed);
         UI.addButton("Add Hexagon", this::addHexagonPressed);
         UI.addButton("Delete Selected", this::deletePressed);
-        UI.addButton("Select another", this::selectAnotherPressed);
+        UI.addButton("Select Another", this::selectAnotherPressed);
+        UI.addButton("Group Selected", this::groupSelectedPressed);
         UI.addButton("Add Connector", this::addConnectorPressed);
         UI.addButton("Delete One Connector", this::deleteOneConnectorPressed);
         UI.addButton("Delete Connectors", this::deleteConnectorsPressed);
@@ -128,6 +129,10 @@ public class DiagramEditorMain implements Serializable {
 
     private void selectedObjectTextTyped(String text) {
         diagramEditor.selectedObjectTextTyped(text);
+    }
+
+    private void groupSelectedPressed() {
+        diagramEditor.groupSelectedPressed();
     }
 
     // ************************* SAVING AND LOADING UI EVENTS ************************* //
