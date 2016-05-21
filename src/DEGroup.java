@@ -11,21 +11,7 @@ public class DEGroup extends DEObject implements Serializable {
 
     public DEGroup(ArrayList<DEObject> deObjects, ArrayList<DEConnector> deConnectors) {
         super(calculateBounds(deObjects));
-        this.deObjects = deObjects;
-        this.deConnectors = deConnectors;
-
-
-    }
-
-    // TODO NEXT don't allow groups of groups
-    // TODO AFTER ungroup button
-    // TODO prevent resizing of group
-
-    @Override
-    public void draw() {
-        super.draw();
-        deObjects.forEach(DEObject::draw);
-        deConnectors.forEach(DEConnector::draw);
+        setObjectsAndConnectors(deObjects, deConnectors);
     }
 
     /**
@@ -52,6 +38,54 @@ public class DEGroup extends DEObject implements Serializable {
         double height = mostBottom - mostTop;
 
         return new DEBounds(mostLeft, mostTop, width, height);
+    }
+    
+    public ArrayList<DEObject> getDeObjects() {
+        return new ArrayList<>(this.deObjects);
+    }
+
+    public ArrayList<DEConnector> getDeConnectors() {
+        return new ArrayList<>(this.deConnectors);
+    }
+
+    /**
+     * Groups of groups aren't allowed, so if there is a group inside
+     * deObjects, it will just be merged into a single "layer" group.
+     *
+     * @param objects
+     * @param connectors
+     */
+    private void setObjectsAndConnectors(ArrayList<DEObject> objects,
+                                         ArrayList<DEConnector> connectors) {
+        // Some objects are groups
+        ArrayList<DEObject> sortedObjects = new ArrayList<>();
+        ArrayList<DEConnector> sortedConnectors = new ArrayList<>(connectors);
+
+        for (DEObject obj : objects) {
+            if (!(obj instanceof DEGroup)) {
+                sortedObjects.add(obj);
+                continue;
+            }
+
+            DEGroup group = (DEGroup) obj;
+            ArrayList<DEObject> groupObjects = group.getDeObjects();
+            sortedObjects.addAll(groupObjects);
+            ArrayList<DEConnector> groupConnectors = group.getDeConnectors();
+            sortedConnectors.addAll(groupConnectors);
+        }
+
+        this.deObjects = sortedObjects;
+        this.deConnectors = sortedConnectors;
+    }
+
+    // TODO AFTER ungroup button
+    // TODO prevent resizing of group
+
+    @Override
+    public void draw() {
+        super.draw();
+        deObjects.forEach(DEObject::draw);
+        deConnectors.forEach(DEConnector::draw);
     }
 
     @Override
