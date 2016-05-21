@@ -111,17 +111,24 @@ public class DiagramEditor implements Serializable {
     }
 
     private boolean deleteConnectorsConnectedToObject(DEObject object) {
-        boolean connectorsWereDeleted = false;
-        for (int c = 0; c < deConnectors.size(); c++) {
-            DEConnector connector = deConnectors.get(c);
-            if (connector.isConnectedToObject(object)) {
-                connectorsWereDeleted = true;
-                deleteConnector(connector);
-                c--;
-            }
+        ArrayList<DEConnector> toDelete = getConnectorsConnectedToObject(object);
+        
+        if (toDelete.size() == 0) return false;
+        
+        for (DEConnector c : toDelete) {
+            deleteConnector(c);
         }
-        if (connectorsWereDeleted) draw();
-        return connectorsWereDeleted;
+        
+        draw();
+        return true;
+    }
+    
+    private ArrayList<DEConnector> getConnectorsConnectedToObject(DEObject object) {
+        ArrayList<DEConnector> connectors = new ArrayList<>();
+        for (DEConnector connector : deConnectors) {
+            if (connector.isConnectedToObject(object)) connectors.add(connector);
+        }
+        return connectors;
     }
 
     private boolean deleteConnectorBetweenObjects(DEObject objectA, DEObject objectB) {
