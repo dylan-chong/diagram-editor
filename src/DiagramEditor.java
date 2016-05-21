@@ -99,18 +99,36 @@ public class DiagramEditor implements Serializable {
         deObjects.remove(object);
     }
 
+    private void deleteConnector(DEConnector connector) {
+        assert deConnectors.contains(connector) : "Can't delete connector that isn't part of the array";
+        deConnectors.remove(connector);
+    }
+
     private boolean deleteConnectorsConnectedToObject(DEObject object) {
         boolean connectorsWereDeleted = false;
         for (int c = 0; c < deConnectors.size(); c++) {
             DEConnector connector = deConnectors.get(c);
             if (connector.isConnectedToObject(object)) {
                 connectorsWereDeleted = true;
-                deConnectors.remove(c);
+                deleteConnector(connector);
                 c--;
             }
         }
         if (connectorsWereDeleted) draw();
         return connectorsWereDeleted;
+    }
+
+    private boolean deleteConnectorBetweenObjects(DEObject objectA, DEObject objectB) {
+        for (DEConnector connector : deConnectors) {
+            if (connector.isConnectedToObject(objectA) &&
+                    connector.isConnectedToObject(objectB)) {
+                deleteConnector(connector);
+                draw();
+                return true;
+            }
+        }
+
+        return false;
     }
 
     // ------------------------- Selection ------------------------- //
@@ -243,7 +261,10 @@ public class DiagramEditor implements Serializable {
         boolean didSelect = attemptSelectAtPoint(mousePoint);
 
         // Disable shouldSelectNextClicked only if an object was selected
-        if (didSelect && shouldSelectNextClicked) shouldSelectNextClicked = false;
+        if (didSelect && shouldSelectNextClicked) {
+            shouldSelectNextClicked = false;
+            output.showMessage("");
+        }
 
         // Should connect next clicked object
         if (firstObjectToConnect != null) {
@@ -293,6 +314,20 @@ public class DiagramEditor implements Serializable {
             output.showMessage("Deleted shapes");
         } else {
             output.showMessage("Couldn't delete any shapes");
+        }
+    }
+
+    public void deleteOneConnectorPressed() {
+        ArrayList<DEObject> selected = getSelectedObjects();
+        if (selected.size() != 2) {
+            output.showMessage("Select only two objects");
+            return;
+        }
+
+        if (deleteConnectorBetweenObjects(selected.get(0), selected.get(1))) {
+            output.showMessage("Deleted connector");
+        } else {
+            output.showMessage("No connector to delete");
         }
     }
 
