@@ -1,21 +1,16 @@
+import java.io.Serializable;
+
 /**
  * Created by Dylan on 17/05/16.
  * <p>
  * Can be implemented for a group and
  * shape objects
  */
-public abstract class DEObject implements DEDraggable {
+public abstract class DEObject implements DEDraggable, Serializable {
 
     private DEBounds bounds;
     private DEObjectNodeCollection nodeCollection;
     private boolean isSelected;
-    /**
-     * When the object has just started being dragged,
-     * a mousePoint is passed to this.pickUp. The
-     * pickUpRelativePoint is of the mouse to the top left
-     * of this object's top left
-     */
-
     private DEDraggableBoundsCalculator boundsCalculator;
 
     public DEObject(DEBounds bounds) {
