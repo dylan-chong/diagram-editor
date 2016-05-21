@@ -36,10 +36,6 @@ public class DiagramEditorMain implements Serializable {
     }
 
     public static void main(String[] args) {
-        if (true) {
-            ManualTest.runTests();
-        }
-
         UI.initialise();
         UI.setWindowSize(1000, 750);
 
