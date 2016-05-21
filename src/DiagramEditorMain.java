@@ -82,7 +82,7 @@ public class DiagramEditorMain implements Serializable {
                 "event, so you may have to try clicking twice.\n" +
                 "\n" +
                 "You can drag around objects and resize them like you can in Microsoft PowerPoint,\n" +
-                "but the objects must be selected.\n" +
+                "but the objects must be selected. Group resizing is disabled for now.\n" +
                 "\n" +
                 "Information relating to user interaction will sometimes appear in the bottom left\n" +
                 "of the screen.");

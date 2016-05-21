@@ -78,7 +78,6 @@ public class DEGroup extends DEObject implements Serializable {
     }
 
     // TODO AFTER ungroup button
-    // TODO prevent resizing of group
 
     @Override
     public void draw() {
@@ -109,4 +108,17 @@ public class DEGroup extends DEObject implements Serializable {
         return new DEDraggableBoundsCalculator(mousePoint, getBounds(), objectBounds);
     }
 
+    /**
+     * Resizing groups isn't allowed yet
+     * @param point
+     * @return
+     */
+    @Override
+    public DEDraggable getDraggableDraggableAtPoint(DEPoint point) {
+        DEDraggable d = super.getDraggableDraggableAtPoint(point);
+        if (d instanceof DENode) {
+            return null;
+        }
+        return d;
+    }
 }
