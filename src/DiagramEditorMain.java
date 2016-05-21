@@ -12,7 +12,7 @@ import java.io.Serializable;
  * with all the UI events, relaying them
  * to the diagramEditor instance.
  */
-public class DiagramEditorMain {
+public class DiagramEditorMain implements Serializable {
 
     private DiagramEditor diagramEditor;
 
