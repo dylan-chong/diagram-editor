@@ -392,9 +392,9 @@ public class DiagramEditor implements Serializable {
         ArrayList<DEObjectShape> selectedShapes = getSelectedShapes();
         if (selectedShapes.size() == 0) return;
 
-        DEObjectShape shape = selectedShapes.get(0);
-
-        shape.setLabelText(text);
+        for (DEObjectShape shape : selectedShapes) {
+            shape.setLabelText(text);
+        }
         draw();
     }
 }
