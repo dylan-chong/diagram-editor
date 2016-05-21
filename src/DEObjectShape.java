@@ -16,7 +16,6 @@ public abstract class DEObjectShape extends DEObject implements Serializable {
     public static final double AVERAGE_CHARACTER_HEIGHT = 10;
     public static final double AVERAGE_CHARACTER_WIDTH = 6.5;
 
-
     protected Color fillColor = DEFAULT_FILL_COLOR;
     protected Color edgeColor = DEFAULT_EDGE_COLOR;
     protected Color labelColor = DEFAULT_LABEL_COLOR;
