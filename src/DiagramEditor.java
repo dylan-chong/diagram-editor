@@ -62,13 +62,19 @@ public class DiagramEditor implements Serializable {
         draw();
     }
 
-    private void addNewConnector(DEConnector connector) {
+    private boolean addNewConnector(DEConnector connector) {
+        // check for duplicates
+        for (DEConnector c : deConnectors) {
+            if (c.equals(connector)) return false;
+        }
+
         deConnectors.add(connector);
         draw();
+        return true;
     }
 
-    private void addNewConnector(DEObject objectA, DEObject objectB) {
-        addNewConnector(new DEConnector(objectA, objectB));
+    private boolean addNewConnector(DEObject objectA, DEObject objectB) {
+        return addNewConnector(new DEConnector(objectA, objectB));
     }
 
     // ------------------------- Deleting Objects and Connectors ------------------------- //
@@ -271,7 +277,8 @@ public class DiagramEditor implements Serializable {
             if (didSelect) {
                 DEConnector connector = new DEConnector(firstObjectToConnect,
                         getSelectedObjects().get(0));
-                addNewConnector(connector);
+                if (addNewConnector(connector)) output.showMessage("Added connector");
+                else output.showMessage("There is already a connector there");
             } else {
                 output.showMessage("Cancelled connection");
             }
@@ -361,8 +368,8 @@ public class DiagramEditor implements Serializable {
             output.showMessage("Please select an object first");
             return;
         } else if (selected.size() == 2) {
-            addNewConnector(selected.get(0), selected.get(1));
-            output.showMessage("");
+            if (addNewConnector(selected.get(0), selected.get(1))) output.showMessage("Added connector");
+            else output.showMessage("There is already a connector there");
             return;
         } else if (selected.size() > 2) {
             output.showMessage("Please select only one or two objects ");
