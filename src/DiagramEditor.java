@@ -67,6 +67,10 @@ public class DiagramEditor implements Serializable {
         draw();
     }
 
+    private void addNewConnector(DEObject objectA, DEObject objectB) {
+        addNewConnector(new DEConnector(objectA, objectB));
+    }
+
     // ------------------------- Deleting Objects and Connectors ------------------------- //
 
     /**
@@ -231,6 +235,7 @@ public class DiagramEditor implements Serializable {
 
     /**
      * Mouse pressed and then released without drag
+     *
      * @param mousePoint
      */
     private void mouseClicked(DEPoint mousePoint) {
@@ -320,11 +325,16 @@ public class DiagramEditor implements Serializable {
         if (selected.size() == 0) {
             output.showMessage("Please select an object first");
             return;
-        } else if (selected.size() > 1) {
-            output.showMessage("Please select only one object");
+        } else if (selected.size() == 2) {
+            addNewConnector(selected.get(0), selected.get(1));
+            output.showMessage("");
+            return;
+        } else if (selected.size() > 2) {
+            output.showMessage("Please select only one or two objects ");
             return;
         }
 
+        // selected.size == 1
         firstObjectToConnect = selected.get(0);
         output.showMessage("Select another object to connect to");
     }
