@@ -232,12 +232,15 @@ public class DiagramEditor implements Serializable {
             ArrayList<DEConnector> objConnectors = getConnectorsConnectedToObject(obj);
             connectors.addAll(objConnectors);
             deleteConnectors(objConnectors);
+
+            obj.setSelected(false);
         }
 
         deleteObjects(objects);
 
         DEGroup group = new DEGroup(objects, connectors);
         addObject(group);
+        draw();
     }
 
     // ************************* MOUSE EVENTS ************************* //
