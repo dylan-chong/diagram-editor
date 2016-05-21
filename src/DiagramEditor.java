@@ -240,6 +240,7 @@ public class DiagramEditor implements Serializable {
 
         DEGroup group = new DEGroup(objects, connectors);
         addObject(group);
+        group.setSelected(true);
         draw();
     }
 
