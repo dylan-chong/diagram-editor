@@ -48,7 +48,11 @@ public class DiagramEditorMain implements Serializable {
     }
 
     private DiagramEditor getNewDiagramEditor() {
-        return new DiagramEditor(new DiagramEditorOutput() {
+        return new DiagramEditor(getNewOutputForDiagramEditor());
+    }
+
+    private DiagramEditorOutput getNewOutputForDiagramEditor() {
+        return new DiagramEditorOutput() {
             @Override
             public void showMessage(String msg) {
                 printMessage(msg);
@@ -58,7 +62,7 @@ public class DiagramEditorMain implements Serializable {
             public void showDebugMessage(String msg) {
                 showMessage("*** DEBUG *** " + msg);
             }
-        });
+        };
     }
 
     private void printMessage(String msg) {
@@ -81,48 +85,6 @@ public class DiagramEditorMain implements Serializable {
                 "You can drag around objects and resize them like you can in Microsoft PowerPoint,\n" +
                 "but the objects must be selected.");
         UI.setDivider(0.9);
-    }
-
-    private void savePressed() {
-        String path = UIFileChooser.save("Choose where to save the diagram");
-        if (path == null) {
-            printMessage("Save cancelled");
-            return;
-        }
-
-        File file = new File(path);
-        try {
-            DEFileManager.saveDiagram(diagramEditor, file);
-            printMessage("Saved diagram");
-            return;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        printMessage("Error: Could not save");
-    }
-
-    private void loadPressed() {
-        String path = UIFileChooser.open("Open a diagram");
-        if (path == null) {
-            printMessage("Load cancelled");
-            return;
-        }
-
-        File file = new File(path);
-        DiagramEditor de = null;
-        try {
-            de = DEFileManager.loadDiagramEditor(file);
-            diagramEditor = de;
-            diagramEditor.draw();
-            printMessage("Loaded diagram");
-            return;
-        } catch (Exception e) {
-            e.printStackTrace();
-            printMessage("Error loading diagram");
-        }
-
-        // TODO TEST loading wrong and right files
     }
 
     private void clearAllPressed() {
@@ -157,5 +119,49 @@ public class DiagramEditorMain implements Serializable {
 
     private void selectedObjectTextTyped(String text) {
         diagramEditor.selectedObjectTextTyped(text);
+    }
+
+    // ************************* SAVING AND LOADING UI EVENTS ************************* //
+
+    private void savePressed() {
+        String path = UIFileChooser.save("Choose where to save the diagram");
+        if (path == null) {
+            printMessage("Save cancelled");
+            return;
+        }
+
+        File file = new File(path);
+        try {
+            diagramEditor.setOutput(null); // prevents needing to serialise Main
+            DEFileManager.saveDiagram(diagramEditor, file);
+            printMessage("Saved diagram");
+            diagramEditor.setOutput(getNewOutputForDiagramEditor()); // put back a new output
+            return;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        printMessage("Error: Could not save");
+    }
+
+    private void loadPressed() {
+        String path = UIFileChooser.open("Open a diagram");
+        if (path == null) {
+            printMessage("Load cancelled");
+            return;
+        }
+
+        File file = new File(path);
+        try {
+            DiagramEditor de = DEFileManager.loadDiagramEditor(file);
+            diagramEditor = de;
+            diagramEditor.setOutput(getNewOutputForDiagramEditor());
+            diagramEditor.draw();
+            printMessage("Loaded diagram");
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
+            printMessage("Error loading diagram");
+        }
     }
 }
