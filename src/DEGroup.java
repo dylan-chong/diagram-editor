@@ -77,8 +77,6 @@ public class DEGroup extends DEObject implements Serializable {
         this.deConnectors = sortedConnectors;
     }
 
-    // TODO AFTER ungroup button
-
     @Override
     public void draw() {
         super.draw();

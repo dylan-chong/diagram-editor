@@ -23,13 +23,18 @@ public class DiagramEditorMain implements Serializable {
         UI.addButton("Instructions", this::displayInstructionsPressed);
         UI.addButton("Save", this::savePressed);
         UI.addButton("Load", this::loadPressed);
+
         UI.addButton("Clear All", this::clearAllPressed);
         UI.addButton("Add Rectangle", this::addRectPressed);
         UI.addButton("Add Ellipse", this::addEllipsePressed);
         UI.addButton("Add Hexagon", this::addHexagonPressed);
+
         UI.addButton("Delete Selected", this::deletePressed);
         UI.addButton("Select Another", this::selectAnotherPressed);
+
         UI.addButton("Group Selected", this::groupSelectedPressed);
+        UI.addButton("Ungroup Selected", this::ungroupSelectedPressed);
+
         UI.addButton("Add Connector", this::addConnectorPressed);
         UI.addButton("Delete One Connector", this::deleteOneConnectorPressed);
         UI.addButton("Delete Connectors", this::deleteConnectorsPressed);
@@ -133,6 +138,10 @@ public class DiagramEditorMain implements Serializable {
 
     private void groupSelectedPressed() {
         diagramEditor.groupSelectedPressed();
+    }
+
+    private void ungroupSelectedPressed() {
+        diagramEditor.ungroupSelectedPressed();
     }
 
     // ************************* SAVING AND LOADING UI EVENTS ************************* //

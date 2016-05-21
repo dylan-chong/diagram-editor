@@ -60,6 +60,13 @@ public class DiagramEditor implements Serializable {
         deObjects.add(0, object);
     }
 
+    private void addObjects(ArrayList<DEObject> objects) {
+        for (DEObject obj : objects) {
+            obj.setSelected(true);
+            addObject(obj);
+        }
+    }
+
     private void addNewShape(DEObject obj) {
         obj.setSelected(true);
         addObject(obj);
@@ -80,6 +87,12 @@ public class DiagramEditor implements Serializable {
 
     private boolean addNewConnector(DEObject objectA, DEObject objectB) {
         return addNewConnector(new DEConnector(objectA, objectB));
+    }
+
+    private void addConnectors(ArrayList<DEConnector> connectors) {
+        for (DEConnector con : connectors) {
+            addNewConnector(con);
+        }
     }
 
     // ------------------------- Deleting Objects and Connectors ------------------------- //
@@ -123,17 +136,17 @@ public class DiagramEditor implements Serializable {
 
     private boolean deleteConnectorsConnectedToObject(DEObject object) {
         ArrayList<DEConnector> toDelete = getConnectorsConnectedToObject(object);
-        
+
         if (toDelete.size() == 0) return false;
-        
+
         for (DEConnector c : toDelete) {
             deleteConnector(c);
         }
-        
+
         draw();
         return true;
     }
-    
+
     private ArrayList<DEConnector> getConnectorsConnectedToObject(DEObject object) {
         ArrayList<DEConnector> connectors = new ArrayList<>();
         for (DEConnector connector : deConnectors) {
@@ -223,6 +236,7 @@ public class DiagramEditor implements Serializable {
     /**
      * Removes the connectors and objects that will be grouped, and puts them
      * into a new group
+     *
      * @param objects
      */
     private void groupObjects(ArrayList<DEObject> objects) {
@@ -245,6 +259,31 @@ public class DiagramEditor implements Serializable {
         addObject(group);
         group.setSelected(true);
         draw();
+    }
+
+    /**
+     * @param objects
+     * @return True if anything was ungrouped
+     */
+    private boolean ungroupObjects(ArrayList<DEObject> objects) {
+        boolean didUngroupSomething = false;
+
+        for (DEObject obj : objects) {
+            if (!(obj instanceof DEGroup)) continue;
+
+            DEGroup group = (DEGroup) obj;
+            ArrayList<DEObject> groupObjects = group.getDeObjects();
+            ArrayList<DEConnector> groupConnectors = group.getDeConnectors();
+
+            addObjects(groupObjects);
+            addConnectors(groupConnectors);
+            deleteObject(group);
+
+            didUngroupSomething = true;
+        }
+
+        if (didUngroupSomething) draw();
+        return didUngroupSomething;
     }
 
     // ************************* MOUSE EVENTS ************************* //
@@ -437,6 +476,17 @@ public class DiagramEditor implements Serializable {
 
         groupObjects(selected);
         output.showMessage("Selection was grouped");
+    }
+
+    public void ungroupSelectedPressed() {
+        ArrayList<DEObject> selected = getSelectedObjects();
+        if (selected.size() == 0) {
+            output.showMessage("Nothing is selected");
+            return;
+        }
+
+        if (ungroupObjects(selected)) output.showMessage("Selection was ungrouped");
+        else output.showMessage("There was nothing to ungroup");
     }
 
     // ************************* TEXT EVENTS ************************* //
