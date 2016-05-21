@@ -57,7 +57,6 @@ public class DEGroup extends DEObject implements Serializable {
      */
     private void setObjectsAndConnectors(ArrayList<DEObject> objects,
                                          ArrayList<DEConnector> connectors) {
-        // Some objects are groups
         ArrayList<DEObject> sortedObjects = new ArrayList<>();
         ArrayList<DEConnector> sortedConnectors = new ArrayList<>(connectors);
 
