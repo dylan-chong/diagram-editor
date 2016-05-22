@@ -29,6 +29,11 @@ public class DiagramEditorMain implements Serializable {
         UI.addButton("Add Ellipse", this::addEllipsePressed);
         UI.addButton("Add Hexagon", this::addHexagonPressed);
 
+        UI.addButton("Set Edge Color", this::setEdgeColorPressed);
+        UI.addButton("Set Fill Color", this::setFillColorPressed);
+        UI.addButton("Set Text Color", this::setTextColorPressed);
+        UI.addTextField("Color Hex", this::colorHexTyped);
+
         UI.addButton("Delete Selected", this::deletePressed);
         UI.addButton("Select Another", this::selectAnotherPressed);
 
@@ -43,7 +48,7 @@ public class DiagramEditorMain implements Serializable {
 
     public static void main(String[] args) {
         UI.initialise();
-        UI.setWindowSize(1000, 750);
+        UI.setWindowSize(1000, 900);
 
         DiagramEditorMain main = new DiagramEditorMain();
 
@@ -112,6 +117,22 @@ public class DiagramEditorMain implements Serializable {
         diagramEditor.addHexagonPressed();
     }
 
+    private void setEdgeColorPressed() {
+        diagramEditor.setEdgeColorPressed();
+    }
+
+    private void setFillColorPressed() {
+        diagramEditor.setFillColorPressed();
+    }
+
+    private void setTextColorPressed() {
+        diagramEditor.setTextColorPressed();
+    }
+
+    private void colorHexTyped(String s) {
+        diagramEditor.colorHexTyped(s);
+    }
+
     private void addConnectorPressed() {
         diagramEditor.addConnectorPressed();
     }
@@ -143,6 +164,8 @@ public class DiagramEditorMain implements Serializable {
     private void ungroupSelectedPressed() {
         diagramEditor.ungroupSelectedPressed();
     }
+
+
 
     // ************************* SAVING AND LOADING UI EVENTS ************************* //
 

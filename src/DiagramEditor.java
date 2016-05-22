@@ -1,5 +1,6 @@
 import ecs100.UI;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -23,6 +24,11 @@ public class DiagramEditor implements Serializable {
     private DEDraggable objectBeingDragged;
     private boolean hasCheckedForObjectBeingDragged;
     private boolean shouldSelectNextClicked = false;
+
+    private String typedColor;
+    private static final int COLOR_TYPE_EDGE = 1;
+    private static final int COLOR_TYPE_FILL = 2;
+    private static final int COLOR_TYPE_TEXT = 3;
 
     /**
      * This is null unless the user has clicked "Add Connector".
@@ -286,6 +292,43 @@ public class DiagramEditor implements Serializable {
         return didUngroupSomething;
     }
 
+    /**
+     * Called by different set color button press methods
+     * to avoid code duplication
+     * @param colorType
+     */
+    private void setColorButtonEvent(int colorType) {
+        if (typedColor == null || typedColor.length() == 0) {
+            output.showMessage("Type in a color first (e.g. 'FF0000')");
+            return;
+        }
+        ArrayList<DEObjectShape> selectedShapes = getSelectedShapes();
+        if (selectedShapes.size() == 0) {
+            output.showMessage("Please select a shape first");
+            return;
+        }
+
+        Color color = DEColorCalculator.getColorForString(typedColor);
+        if (color == null) {
+            output.showMessage("Invalid colour. Try something like 0C39A7");
+            return;
+        }
+        for (DEObjectShape shape : selectedShapes) {
+            switch (colorType) {
+                case COLOR_TYPE_EDGE:
+                    shape.setEdgeColor(color);
+                    break;
+                case COLOR_TYPE_FILL:
+                    shape.setFillColor(color);
+                    break;
+                case COLOR_TYPE_TEXT:
+                    shape.setLabelColor(color);
+                    break;
+            }
+        }
+        draw();
+    }
+
     // ************************* MOUSE EVENTS ************************* //
 
     public void doMouse(String action, double x, double y) {
@@ -397,6 +440,18 @@ public class DiagramEditor implements Serializable {
         addNewShape(new DEObjectShapeHexagon(getRandomNewShapeBounds()));
     }
 
+    public void setTextColorPressed() {
+        setColorButtonEvent(COLOR_TYPE_TEXT);
+    }
+
+    public void setFillColorPressed() {
+        setColorButtonEvent(COLOR_TYPE_FILL);
+    }
+
+    public void setEdgeColorPressed() {
+        setColorButtonEvent(COLOR_TYPE_EDGE);
+    }
+
     public void selectAnotherPressed() {
         output.showMessage("Select another shape");
         shouldSelectNextClicked = true;
@@ -505,4 +560,9 @@ public class DiagramEditor implements Serializable {
         }
         draw();
     }
+
+    public void colorHexTyped(String s) {
+        this.typedColor = s;
+    }
 }
+

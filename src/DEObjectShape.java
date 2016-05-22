@@ -26,6 +26,18 @@ public abstract class DEObjectShape extends DEObject implements Serializable {
         super(bounds);
     }
 
+    public void setFillColor(Color fillColor) {
+        this.fillColor = fillColor;
+    }
+
+    public void setEdgeColor(Color edgeColor) {
+        this.edgeColor = edgeColor;
+    }
+
+    public void setLabelColor(Color labelColor) {
+        this.labelColor = labelColor;
+    }
+
     @Override
     public void draw() {
         super.draw();
