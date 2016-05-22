@@ -23,7 +23,7 @@ public class DEObjectShapeRect extends DEObjectShape implements Serializable {
         }
         if (edgeColor != null) {
             UI.setColor(edgeColor);
-            UI.drawRect(b.getLeft(), b.getTop(), b.getHeight(), b.getHeight());
+            UI.drawRect(b.getLeft(), b.getTop(), b.getWidth(), b.getHeight());
         }
 
         super.draw();
