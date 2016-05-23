@@ -14,11 +14,11 @@ public class DEColorCalculator {
      * @return
      */
     public static Color getColorForString(String str) {
-        String colorString = str;
+        String colorString = str.toLowerCase();
         if (str.length() == 7 && str.startsWith("#"))
             colorString = str.substring(1);
 
-        if (!checkValidColorHexString(str)) return null;
+        if (!checkValidColorHexString(colorString)) return null;
         int r = getDecimalValueOfHexStringColor(colorString.substring(0, 2));
         int g = getDecimalValueOfHexStringColor(colorString.substring(2, 4));
         int b = getDecimalValueOfHexStringColor(colorString.substring(4, 6));

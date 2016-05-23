@@ -53,8 +53,8 @@ public class DiagramEditor implements Serializable {
     public void draw() {
         UI.clearGraphics();
 
-        deObjects.forEach(DEObject::draw);
         deConnectors.forEach(DEConnector::draw);
+        deObjects.forEach(DEObject::draw);
 
         UI.repaintAllGraphics();
     }
