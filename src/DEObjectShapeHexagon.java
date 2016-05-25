@@ -17,7 +17,7 @@ public class DEObjectShapeHexagon extends DEObjectShape implements Serializable 
         double t = bounds.getTop();
         double w = bounds.getWidth();
         double h = bounds.getHeight();
-        DEPoint[] points = new DEPoint[] {
+        DEPoint[] points = new DEPoint[]{
                 new DEPoint(l + 0.25 * w, t), // Top left-ish
                 new DEPoint(l + 0.75 * w, t), // Top right-ish
                 new DEPoint(l + w, t + (h / 2)), // Middle right

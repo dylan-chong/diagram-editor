@@ -108,6 +108,7 @@ public class DEGroup extends DEObject implements Serializable {
 
     /**
      * Resizing groups isn't allowed yet
+     *
      * @param point
      * @return
      */
