@@ -426,32 +426,38 @@ public class DiagramEditor implements Serializable {
 
     /**
      * @param objects
-     * @param vertically When true, aligns them to the left-most of the objects
-     *                   and when false, aligns to them to the top-most.
+     * @param vertically When true, aligns them to the average center x of the objects
+     *                   and when false, aligns them to the average center y.
      */
     private void alignObjects(ArrayList<DEObject> objects, boolean vertically) {
-        double minimumOrdinate = 999999;
+        assert objects.size() > 1 : "alignObjects() requires having at least 2 objects";
+        double totalOrdinates = 0;
 
         for (DEObject obj : objects) {
-            DEPoint objTopLeft = obj.getBounds().getTopLeft();
+            DEPoint center = obj.getBounds().getCenter();
             if (vertically) {
-                if (objTopLeft.getX() < minimumOrdinate) {
-                    minimumOrdinate = objTopLeft.getX();
-                }
+                totalOrdinates += center.getX();
             } else { // horizontally
-                if (objTopLeft.getY() < minimumOrdinate) {
-                    minimumOrdinate = objTopLeft.getY();
-                }
+                totalOrdinates += center.getY();
             }
         }
+
+        double averageOrdinate = totalOrdinates / objects.size();
 
         for (DEObject obj : objects) {
             DEBounds originalBounds = obj.getBounds();
             DEBounds newBounds;
-            if (vertically) newBounds = new DEBounds(minimumOrdinate, originalBounds.getTop(),
-                    originalBounds.getWidth(), originalBounds.getHeight());
-            else newBounds = new DEBounds(originalBounds.getLeft(), minimumOrdinate,
-                    originalBounds.getWidth(), originalBounds.getHeight());
+
+            if (vertically) newBounds = new DEBounds(
+                    averageOrdinate - originalBounds.getWidth() / 2,
+                    originalBounds.getTop(),
+                    originalBounds.getWidth(),
+                    originalBounds.getHeight());
+            else newBounds = new DEBounds(
+                    originalBounds.getLeft(),
+                    averageOrdinate - originalBounds.getHeight() / 2,
+                    originalBounds.getWidth(),
+                    originalBounds.getHeight());
 
             obj.setBounds(newBounds);
         }
