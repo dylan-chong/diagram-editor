@@ -44,6 +44,9 @@ public class DiagramEditorMain implements Serializable {
         UI.addButton("Delete One Connector", this::deleteOneConnectorPressed);
         UI.addButton("Delete Connectors", this::deleteConnectorsPressed);
         UI.addTextField("Selected Object Text", this::selectedObjectTextTyped);
+
+        UI.addButton("Align Vertically", this::alignVerticallyPressed);
+        UI.addButton("Align Horizontally", this::alignHorizontallyPressed);
     }
 
     public static void main(String[] args) {
@@ -165,7 +168,13 @@ public class DiagramEditorMain implements Serializable {
         diagramEditor.ungroupSelectedPressed();
     }
 
+    private void alignHorizontallyPressed() {
+        diagramEditor.alignHorizontallyPressed();
+    }
 
+    private void alignVerticallyPressed() {
+        diagramEditor.alignVerticallyPressed();
+    }
 
     // ************************* SAVING AND LOADING UI EVENTS ************************* //
 
