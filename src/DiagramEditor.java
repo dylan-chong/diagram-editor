@@ -424,8 +424,39 @@ public class DiagramEditor implements Serializable {
 
     // ------------------------- Alignment ------------------------- //
 
+    /**
+     * @param objects
+     * @param vertically When true, aligns them to the left-most of the objects
+     *                   and when false, aligns to them to the top-most.
+     */
     private void alignObjects(ArrayList<DEObject> objects, boolean vertically) {
+        double minimumOrdinate = 999999;
 
+        for (DEObject obj : objects) {
+            DEPoint objTopLeft = obj.getBounds().getTopLeft();
+            if (vertically) {
+                if (objTopLeft.getX() < minimumOrdinate) {
+                    minimumOrdinate = objTopLeft.getX();
+                }
+            } else { // horizontally
+                if (objTopLeft.getY() < minimumOrdinate) {
+                    minimumOrdinate = objTopLeft.getY();
+                }
+            }
+        }
+
+        for (DEObject obj : objects) {
+            DEBounds originalBounds = obj.getBounds();
+            DEBounds newBounds;
+            if (vertically) newBounds = new DEBounds(minimumOrdinate, originalBounds.getTop(),
+                    originalBounds.getWidth(), originalBounds.getHeight());
+            else newBounds = new DEBounds(originalBounds.getLeft(), minimumOrdinate,
+                    originalBounds.getWidth(), originalBounds.getHeight());
+
+            obj.setBounds(newBounds);
+        }
+
+        draw();
     }
 
     // ************************* BUTTON EVENTS ************************* //
