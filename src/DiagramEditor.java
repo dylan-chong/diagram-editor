@@ -11,6 +11,9 @@ import java.util.ArrayList;
  */
 public class DiagramEditor implements Serializable {
 
+    private static final int COLOR_TYPE_EDGE = 1;
+    private static final int COLOR_TYPE_FILL = 2;
+    private static final int COLOR_TYPE_TEXT = 3;
     /**
      * Contains DEGroup and DEObjectShape objects. They
      * are sorted from top to bottom (where the top is
@@ -19,17 +22,11 @@ public class DiagramEditor implements Serializable {
     private ArrayList<DEObject> deObjects = new ArrayList<>();
     private ArrayList<DEConnector> deConnectors = new ArrayList<>();
     private DiagramEditorOutput output;
-
     private DEPoint mouseDownPoint;
     private DEDraggable objectBeingDragged;
     private boolean hasCheckedForObjectBeingDragged;
     private boolean shouldSelectNextClicked = false;
-
     private String typedColor;
-    private static final int COLOR_TYPE_EDGE = 1;
-    private static final int COLOR_TYPE_FILL = 2;
-    private static final int COLOR_TYPE_TEXT = 3;
-
     /**
      * This is null unless the user has clicked "Add Connector".
      * Then it will be set to the currently selected object, and
@@ -295,6 +292,7 @@ public class DiagramEditor implements Serializable {
     /**
      * Called by different set color button press methods
      * to avoid code duplication
+     *
      * @param colorType
      */
     private void setColorButtonEvent(int colorType) {
@@ -328,6 +326,7 @@ public class DiagramEditor implements Serializable {
         }
         draw();
     }
+
 
     // ************************* MOUSE EVENTS ************************* //
 
@@ -421,6 +420,12 @@ public class DiagramEditor implements Serializable {
         }
         mouseDownPoint = null;
         objectBeingDragged = null;
+    }
+
+    // ------------------------- Alignment ------------------------- //
+
+    private void alignObjects(ArrayList<DEObject> objects, boolean vertically) {
+
     }
 
     // ************************* BUTTON EVENTS ************************* //
@@ -542,6 +547,25 @@ public class DiagramEditor implements Serializable {
 
         if (ungroupObjects(selected)) output.showMessage("Selection was ungrouped");
         else output.showMessage("There was nothing to ungroup");
+    }
+
+    public void alignHorizontallyPressed() {
+        doAlignment(false);
+    }
+
+    public void alignVerticallyPressed() {
+        doAlignment(true);
+    }
+
+    private void doAlignment(boolean vertically) {
+        ArrayList<DEObject> selected = getSelectedObjects();
+        if (selected.size() < 2) {
+            output.showMessage("Please select at least 2 objects");
+            return;
+        }
+
+        alignObjects(selected, vertically);
+        output.showMessage("Aligned objects horizontally");
     }
 
     // ************************* TEXT EVENTS ************************* //
